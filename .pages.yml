@@ -12,6 +12,10 @@ media:
     label: Bilder
     input: assets/images/uploads
     output: /assets/images/uploads
+  - name: dokumente
+    label: Dokumente (PDF)
+    input: assets/pdf
+    output: /assets/pdf
 
 content:
   - name: news
