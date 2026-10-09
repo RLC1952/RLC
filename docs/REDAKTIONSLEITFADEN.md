@@ -202,6 +202,20 @@ Viele kennen aus früheren Zeiten Systeme wie TinaCMS, WordPress oder Joomla. F�
 
 ---
 
+### 3.4 Welche Bereiche Sie im CMS editieren können (Stand Oktober 2026)
+
+In der linken Leiste des CMS finden Sie alle redaktionellen Bereiche:
+
+- **Aktuelles / News** – Vereinsberichte mit Bild (anlegen, bearbeiten, löschen).
+- **Startseite** – Kopfbereich (Titel, Einleitung, Hero-Bild), Karten „Rund um den Verein" und Schnellzugriffe.
+- **Termine & Wettkämpfe** – Termin-Kacheln mit Datum, Ort und Details; das Terminposter-PDF ist austauschbar. Neue Termine erscheinen automatisch auch auf der Startseite (Termin-Panel).
+- **Trainerteam** – Seitentexte und Trainerfotos (den Namen exakt wie im Trainingsplan angeben).
+- **Trainingszeiten & Sportgruppen** – Saison-Infos und alle Trainingsgruppen als übersichtliche Liste (kein Code mehr!).
+
+Nach dem Speichern ist alles in ein bis zwei Minuten live; gelöschte Termine verschwinden automatisch von allen Seiten.
+
+---
+
 ## 4. Rechtliche & ethische Leitplanken (Schutz unserer Kinder & Jugendlichen)
 
 Als traditionsreicher Leichtathletikverein tragen wir eine **besondere Fürsorgepflicht für unsere Kinder und Jugendlichen**. Beim Veröffentlichen im Internet gelten das Kunsturhebergesetz (KUG) und die Datenschutz-Grundverordnung (DSGVO).

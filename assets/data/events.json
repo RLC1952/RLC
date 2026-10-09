@@ -1,0 +1,74 @@
+{
+  "page": {
+    "title": "Veranstaltungen und Wettkämpfe im Überblick.",
+    "lead": "Was, wann, wo und Anmeldung – kompakt an einem Ort.",
+    "overviewTitle": "Aktuelle Veranstaltungen.",
+    "emptyNote": "Aktuell sind keine bevorstehenden Termine sichtbar. Vergangene Termine werden automatisch ausgeblendet.",
+    "ctaTitle": "Fragen zu Anmeldung, Ort oder Ablauf?",
+    "ctaText": "Der Verein klärt Details zu den Veranstaltungen direkt über den zentralen Kontaktweg.",
+    "posterLabel": "Terminposter öffnen",
+    "posterHref": "Termine/RLC1952_Poster_A2_QUER.pdf"
+  },
+  "termine": [
+    {
+      "date": "2026-05-09",
+      "kicker": "Meeting",
+      "title": "4. Bodynostic Meeting",
+      "teaser": "Stadion Hohenhorst · zentrale Wettkampfveranstaltung.",
+      "was": "Leichtathletik-Meeting",
+      "wo": "Stadion Hohenhorst",
+      "wer": "Wettkampforga",
+      "anmeldung": "Details über die Vereins-/Wettkampfmeldung.",
+      "featured": false,
+      "link": {"href": "", "label": ""}
+    },
+    {
+      "date": "2026-06-04",
+      "kicker": "Nachwuchs",
+      "title": "15. KidsCup Recklinghausen",
+      "teaser": "Nachwuchsveranstaltung im Stadion Hohenhorst.",
+      "was": "KidsCup / Nachwuchswettkampf",
+      "wo": "Stadion Hohenhorst",
+      "wer": "Kinder- und Jugendbereich",
+      "anmeldung": "Details über den Verein.",
+      "featured": false,
+      "link": {"href": "", "label": ""}
+    },
+    {
+      "date": "2026-08-28",
+      "kicker": "Laufveranstaltung",
+      "title": "9. Sparkassen Abendlauf",
+      "teaser": "5 km · 10 km · Kreismeisterschaften 10 km · Stadion Hohenhorst & Außenbereich.",
+      "was": "Abendlauf mit 5 km, 10 km und Kreismeisterschaften 10 km",
+      "wo": "Stadion Hohenhorst & Außenbereich",
+      "wer": "Läuferinnen und Läufer",
+      "anmeldung": "Über die Abendlauf-Seite und Ausschreibung.",
+      "featured": true,
+      "link": {"href": "pages/abendlauf.html", "label": "Zur Abendlauf-Seite"}
+    },
+    {
+      "date": "2026-09-19",
+      "kicker": "Wettkampf",
+      "title": "43. Stadtmeisterschaften",
+      "teaser": "Stadtmeisterschaften im Stadion Hohenhorst.",
+      "was": "Stadtmeisterschaften",
+      "wo": "Stadion Hohenhorst",
+      "wer": "teilnehmende Vereine",
+      "anmeldung": "Informationen kommen mit der Ausschreibung.",
+      "featured": false,
+      "link": {"href": "", "label": ""}
+    },
+    {
+      "date": "2026-12-31",
+      "kicker": "Laufveranstaltung",
+      "title": "39. Silvesterlauf",
+      "teaser": "5 km · 10 km · Nordic Walking · Walking · Stadion Hohenhorst & Außenbereich.",
+      "was": "Silvesterlauf mit Lauf- und Walking-Angeboten",
+      "wo": "Stadion Hohenhorst & Außenbereich",
+      "wer": "Läuferinnen, Läufer, Walking/Nordic-Walking",
+      "anmeldung": "Informationen kommen mit der Ausschreibung.",
+      "featured": false,
+      "link": {"href": "", "label": ""}
+    }
+  ]
+}

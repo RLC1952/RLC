@@ -16,6 +16,18 @@ media:
     label: Dokumente (PDF)
     input: assets/pdf
     output: /assets/pdf
+  - name: website-images
+    label: Website-Bilder
+    input: assets/images
+    output: /assets/images
+  - name: trainer
+    label: Trainerfotos
+    input: assets/images/trainer
+    output: /assets/images/trainer
+  - name: posters
+    label: Poster & Termin-PDFs
+    input: Termine
+    output: /Termine
 
 content:
   - name: news
@@ -70,6 +82,318 @@ content:
           - name: local
             label: Bilddatei
             type: image
+
+  - name: home
+    label: Startseite
+    type: file
+    path: assets/data/home.json
+    format: json
+    fields:
+      - name: hero
+        label: Kopfbereich (Hero)
+        type: object
+        fields:
+          - name: kickerCity
+            label: Kicker links (Ort)
+            type: string
+          - name: kickerClaim
+            label: Kicker rechts (Claim)
+            type: string
+          - name: titleLine1
+            label: Titel Zeile 1
+            type: string
+          - name: titleLine2
+            label: Titel Zeile 2 (kursiv)
+            type: string
+          - name: lead
+            label: Einleitungstext
+            type: text
+          - name: image
+            label: Hero-Bild
+            type: object
+            fields:
+              - name: src
+                label: Bilddatei
+                type: image
+                options:
+                  media: website-images
+              - name: alt
+                label: Bildbeschreibung (barrierefrei)
+                type: string
+              - name: copyright
+                label: Bildnachweis
+                type: string
+      - name: newsSectionTitle
+        label: Überschrift „Aktuelles"
+        type: string
+      - name: datesPanelTitle
+        label: Überschrift Termine-Box
+        type: string
+      - name: shortcutsTitle
+        label: Überschrift „Schnelle Wege"
+        type: string
+      - name: shortcuts
+        label: Schnelle Wege (Links)
+        type: object
+        list: true
+        fields:
+          - name: label
+            label: Beschriftung
+            type: string
+          - name: cta
+            label: Hinweis rechts
+            type: string
+          - name: href
+            label: Ziel-Link
+            type: string
+      - name: visitLabel
+        label: Abschnitts-Label „Rund um den Verein"
+        type: string
+      - name: visitCards
+        label: Karten „Rund um den Verein"
+        type: object
+        list: true
+        fields:
+          - name: tag
+            label: Kleiner Titel (Tag)
+            type: string
+          - name: title
+            label: Überschrift
+            type: string
+          - name: text
+            label: Kurztext
+            type: string
+          - name: linkLabel
+            label: Linktext
+            type: string
+          - name: href
+            label: Ziel-Link
+            type: string
+          - name: external
+            label: Externer Link (neuem Tab öffnen)
+            type: boolean
+
+  - name: termine
+    label: Termine & Wettkämpfe
+    type: file
+    path: assets/data/events.json
+    format: json
+    fields:
+      - name: page
+        label: Seitentexte
+        type: object
+        fields:
+          - name: title
+            label: Seitenüberschrift
+            type: string
+          - name: lead
+            label: Einleitungstext
+            type: text
+          - name: overviewTitle
+            label: Überschrift Jahresüberblick
+            type: string
+          - name: emptyNote
+            label: Hinweistext (keine Termine)
+            type: text
+          - name: ctaTitle
+            label: Abschluss-Überschrift
+            type: string
+          - name: ctaText
+            label: Abschluss-Text
+            type: text
+          - name: posterLabel
+            label: Poster-Linktext
+            type: string
+          - name: posterHref
+            label: Terminposter (PDF)
+            type: file
+            options:
+              media: posters
+      - name: termine
+        label: Termine (Liste)
+        type: object
+        list: true
+        fields:
+          - name: date
+            label: Datum (Kalender)
+            type: date
+            required: true
+          - name: kicker
+            label: Kategorie (z. B. Meeting)
+            type: string
+          - name: title
+            label: Titel
+            type: string
+            required: true
+          - name: teaser
+            label: Kurzbeschreibung
+            type: text
+          - name: was
+            label: Was
+            type: string
+          - name: wo
+            label: Wo
+            type: string
+          - name: wer
+            label: Wer
+            type: string
+          - name: anmeldung
+            label: Anmeldung
+            type: string
+          - name: featured
+            label: Hervorgehobene Karte
+            type: boolean
+          - name: link
+            label: Zusatz-Link (optional)
+            type: object
+            fields:
+              - name: href
+                label: Link-Ziel
+                type: string
+              - name: label
+                label: Linktext
+                type: string
+
+  - name: team
+    label: Trainerteam
+    type: file
+    path: assets/data/team.json
+    format: json
+    fields:
+      - name: page
+        label: Seitentexte
+        type: object
+        fields:
+          - name: title
+            label: Seitenüberschrift
+            type: string
+          - name: lead
+            label: Einleitungstext
+            type: text
+          - name: directoryTitle
+            label: Überschrift Teamverzeichnis
+            type: string
+          - name: ctaTitle
+            label: Abschluss-Überschrift
+            type: string
+          - name: ctaText
+            label: Abschluss-Text
+            type: text
+          - name: introImage
+            label: Intro-Bild
+            type: object
+            fields:
+              - name: src
+                label: Bilddatei
+                type: image
+                options:
+                  media: website-images
+              - name: alt
+                label: Bildbeschreibung (barrierefrei)
+                type: string
+      - name: trainerPhotos
+        label: Trainerfotos (Name exakt wie im Trainingsplan)
+        type: object
+        list: true
+        fields:
+          - name: name
+            label: Trainername
+            type: string
+          - name: image
+            label: Foto
+            type: image
+            options:
+              media: trainer
+
+  - name: training
+    label: Trainingszeiten & Sportgruppen
+    type: file
+    path: assets/data/training.json
+    format: json
+    fields:
+      - name: meta
+        label: Saison-Infos
+        type: object
+        fields:
+          - name: seasonLabel
+            label: Saison (z. B. Sommersaison 2026)
+            type: string
+          - name: validRange
+            label: Gültigkeitszeitraum
+            type: string
+          - name: performanceNote
+            label: Hinweis Leistungsgruppen (Kurzform)
+            type: string
+          - name: contactEmail
+            label: Kontakt-E-Mail
+            type: string
+      - name: page
+        label: Seitentexte
+        type: object
+        fields:
+          - name: title
+            label: Seitenüberschrift
+            type: string
+          - name: lead
+            label: Einleitungstext
+            type: text
+          - name: planTitle
+            label: Überschrift Wochenplan
+            type: string
+          - name: introImage
+            label: Intro-Bild
+            type: object
+            fields:
+              - name: src
+                label: Bilddatei
+                type: image
+                options:
+                  media: website-images
+              - name: alt
+                label: Bildbeschreibung (barrierefrei)
+                type: string
+          - name: pdfHref
+            label: Trainingszeiten-PDF (Dateipfad)
+            type: string
+            readonly: true
+          - name: validityNote
+            label: Gültigkeit-Hinweis
+            type: text
+          - name: performanceNoteText
+            label: Leistungsgruppen-Hinweis
+            type: text
+          - name: tableIntro
+            label: Tabellen-Einleitung
+            type: text
+      - name: groups
+        label: Trainingsgruppen (Liste)
+        type: object
+        list: true
+        fields:
+          - name: day
+            label: Wochentag
+            type: select
+            options:
+              values: [Montag, Dienstag, Mittwoch, Donnerstag, Freitag, Samstag, Sonntag]
+          - name: time
+            label: Uhrzeit (z. B. 17:00 - 18:30 Uhr)
+            type: string
+          - name: group
+            label: Gruppe
+            type: string
+          - name: year
+            label: Jahrgang
+            type: string
+          - name: location
+            label: Ort
+            type: string
+          - name: trainers
+            label: Trainerinnen und Trainer
+            type: string
+            list: true
+          - name: performance
+            label: Wettkampf- und Leistungstraining
+            type: boolean
 
 actions:
   - name: regen-news

@@ -22,7 +22,8 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet" />
     <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
     <script src="../assets/js/components.js?v=3"></script>
-    <script src="../assets/js/training_schedule.js?v=3"></script>
+    <script src="../assets/js/training_schedule.js?v=4" data-training-src="../assets/data/training.json"></script>
+    <script src="../assets/js/cms_content.js?v=1" data-cms-src="../assets/data/training.json" data-cms-page="training"></script>
 </head>
 <body class="subpage subpage-training min-h-screen">
     <header data-shared-shell-placeholder></header>
@@ -31,17 +32,17 @@
             <section class="subpage-intro subpage-intro--visual subpage-intro--data-heavy" aria-labelledby="training-page-title">
                 <div class="subpage-intro__content">
                     <span class="subpage-eyebrow">Trainingszeiten</span>
-                    <h1 id="training-page-title" class="subpage-display">Trainingsplan für Kinder, Jugend, Erwachsene und Senioren.</h1>
-                    <p class="subpage-lead">Hier findest du Gruppen, Zeiten, Orte und Trainerteam kompakt im Überblick. Für den Einstieg gilt: erst Kontakt aufnehmen, dann Probetraining abstimmen.</p>
+                    <h1 id="training-page-title" class="subpage-display" data-cms="page.title">Trainingsplan für Kinder, Jugend, Erwachsene und Senioren.</h1>
+                                        <p class="subpage-lead" data-cms="page.lead">Hier findest du Gruppen, Zeiten, Orte und Trainerteam kompakt im Überblick. Für den Einstieg gilt: erst Kontakt aufnehmen, dann Probetraining abstimmen.</p>
                     <div class="subpage-meta-row subpage-meta-row--dynamic subpage-meta-row--3" id="training-meta-row" aria-label="Schnellüberblick zu den Trainingszeiten"></div>
                     <div class="subpage-actions subpage-actions--hero">
                         <a href="#training-plan-title" class="subpage-button">Zum Wochenplan <span class="material-icons-round" aria-hidden="true">arrow_forward</span></a>
                         <a href="contact.html#contact" class="subpage-button subpage-button--secondary">Probetraining abstimmen <span class="material-icons-round" aria-hidden="true">arrow_forward</span></a>
-                        <a href="../RLC1952_Trainingszeiten_2026_Sommer.pdf" class="subpage-link">PDF ansehen <span class="material-icons-round" aria-hidden="true">south</span></a>
+                        <a href="../RLC1952_Trainingszeiten_2026_Sommer.pdf" data-cms-href="page.pdfHref" class="subpage-link">PDF ansehen <span class="material-icons-round" aria-hidden="true">south</span></a>
                     </div>
                 </div>
                 <figure class="subpage-intro__visual">
-                    <img src="../assets/images/rlc-training-action.jpg" alt="Läuferinnen und Läufer beim RLC-Training auf der Bahn" width="1800" height="1196" loading="lazy" decoding="async" />
+                    <img src="../assets/images/rlc-training-action.jpg" alt="Läuferinnen und Läufer beim RLC-Training auf der Bahn" width="1800" height="1196" loading="lazy" decoding="async" data-cms-img="page.introImage" />
                 </figure>
             </section>
 
@@ -50,7 +51,7 @@
                     <div class="subpage-title-row subpage-surface__header">
                         <div>
                             <span class="subpage-eyebrow">Wochenplan</span>
-                            <h2 id="training-plan-title" class="subpage-title">Alle Einheiten mit Tag, Zeit, Gruppe, Ort und Trainerteam.</h2>
+                            <h2 id="training-plan-title" class="subpage-title" data-cms="page.planTitle">Alle Einheiten mit Tag, Zeit, Gruppe, Ort und Trainerteam.</h2>
                         </div>
                     </div>
 
@@ -91,8 +92,8 @@
                     </details>
 
                     <div class="subpage-table-note subpage-table-note--intro">
-                        <p id="training-table-intro">Der Wochenplan zeigt alle aktuellen Sommertermine.</p>
-                        <a href="../RLC1952_Trainingszeiten_2026_Sommer.pdf" class="subpage-link">Original-PDF öffnen <span class="material-icons-round" aria-hidden="true">arrow_forward</span></a>
+                        <p id="training-table-intro" data-cms="page.tableIntro">Der Wochenplan zeigt alle aktuellen Sommertermine.</p>
+                        <a href="../RLC1952_Trainingszeiten_2026_Sommer.pdf" data-cms-href="page.pdfHref" class="subpage-link">Original-PDF öffnen <span class="material-icons-round" aria-hidden="true">arrow_forward</span></a>
                     </div>
 
                     <div class="subpage-table-shell">
@@ -130,11 +131,11 @@
                     <section class="subpage-grid training-plan-notes" aria-label="Gültigkeit, Leistungsgruppen und Einstiegshinweise">
                         <article class="subpage-note subpage-note--info">
                             <strong>Gültigkeit</strong>
-                            <p id="training-validity-note">Gültig von April 2026 bis zu den Herbstferien in NRW.</p>
+                            <p id="training-validity-note" data-cms="page.validityNote">Gültig von April 2026 bis zu den Herbstferien in NRW.</p>
                         </article>
                         <article class="subpage-note subpage-note--warning">
                             <strong>Leistungsgruppen</strong>
-                            <p id="training-performance-note">Markierte Einträge kennzeichnen Wettkampf- und Leistungstraining.</p>
+                            <p id="training-performance-note" data-cms="page.performanceNoteText">Markierte Einträge kennzeichnen Wettkampf- und Leistungstraining.</p>
                         </article>
                         <article class="subpage-note subpage-note--success">
                             <strong>Einstieg</strong>
@@ -148,11 +149,12 @@
     <footer data-shared-footer-placeholder></footer>
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const schedule = Array.isArray(window.trainingSchedule) ? window.trainingSchedule : [];
-            const meta = window.trainingScheduleMeta || {};
+            document.addEventListener('DOMContentLoaded', () => {
+                const bootTraining = () => {
+                const schedule = Array.isArray(window.trainingSchedule) ? window.trainingSchedule : [];
+                const meta = window.trainingScheduleMeta || {};
 
-            const tableBody = document.getElementById('training-table-body');
+                const tableBody = document.getElementById('training-table-body');
             const cardContainer = document.getElementById('training-cards');
             const metaRow = document.getElementById('training-meta-row');
             const validityNote = document.getElementById('training-validity-note');
@@ -333,13 +335,20 @@
             });
 
             renderMeta();
-            renderSchedule();
+                        renderSchedule();
+                        };
 
-            validityNote.textContent = `Gültig: ${meta.validRange || 'den aktuellen Sommerstand'}.`;
-            performanceNote.textContent = `${meta.performanceNote || '* Wettkampf- und Leistungstraining'} ist auf der Seite direkt an den betreffenden Gruppen markiert.`;
-            tableIntro.textContent = `${schedule.length} Einheiten an ${uniqueDayCount} Wochentagen. Die Filter sind optional und standardmäßig eingeklappt.`;
-        });
-    </script>
+                        const onTrainingData = () => {
+                            document.removeEventListener('rlc:training-data', onTrainingData);
+                            bootTraining();
+                        };
+                        if (window.trainingSchedule) {
+                            bootTraining();
+                        } else {
+                            document.addEventListener('rlc:training-data', onTrainingData);
+                        }
+                    });
+                </script>
 </body>
 </html>
 

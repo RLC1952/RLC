@@ -1,0 +1,17 @@
+{
+  "page": {
+    "title": "Unser Trainerteam im Überblick.",
+    "lead": "Hier findest du die Trainerinnen und Trainer, die aktuell unsere Gruppen begleiten, mit ihren Einsatzbereichen.",
+    "directoryTitle": "Trainerteam mit Gruppen und Einsatzbereichen.",
+    "ctaTitle": "Noch nicht sicher, welche Gruppe passt?",
+    "ctaText": "Eine kurze Nachricht mit Alter, Ziel und Vorerfahrung reicht aus. Dann landet die Anfrage direkt beim passenden Bereich.",
+    "introImage": {
+      "src": "assets/images/rlc-team-nachwuchs.jpg",
+      "alt": "RLC-Gruppe beim gemeinsamen Training"
+    }
+  },
+  "trainerPhotos": [
+    {"name": "Ludger Zander", "image": "assets/images/trainer/trainer-ludger-zander.webp"},
+    {"name": "Ulrich Moschner", "image": "assets/images/trainer/trainer-ulrich-moschner.webp"}
+  ]
+}

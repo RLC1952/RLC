@@ -16,6 +16,7 @@
     <link href="../assets/css/subpages.css?v=15" rel="stylesheet" />
     <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
     <script src="../assets/js/components.js?v=3"></script>
+    <script src="../assets/js/cms_content.js?v=1" data-cms-src="../assets/data/events.json" data-cms-page="events"></script>
 </head>
 <body class="subpage subpage-events min-h-screen">
     <header data-shared-shell-placeholder></header>
@@ -24,15 +25,15 @@
             <section class="subpage-intro subpage-intro--full" aria-labelledby="events-page-title">
                 <div class="subpage-intro__content">
                     <span class="subpage-eyebrow">Termine & Veranstaltungen</span>
-                    <h1 id="events-page-title" class="subpage-display">Veranstaltungen und Wettkämpfe im Überblick.</h1>
-                    <p class="subpage-lead">Was, wann, wo und Anmeldung – kompakt an einem Ort.</p>
+                    <h1 id="events-page-title" class="subpage-display" data-cms="page.title">Veranstaltungen und Wettkämpfe im Überblick.</h1>
+                                        <p class="subpage-lead" data-cms="page.lead">Was, wann, wo und Anmeldung – kompakt an einem Ort.</p>
                     <div class="events-hero-icons" aria-hidden="true">
                         <span><span class="material-icons-round">directions_run</span> Lauf</span>
                         <span><span class="material-icons-round">stadium</span> Stadion</span>
                     </div>
                     <div class="subpage-actions">
                         <a href="#jahresueberblick" class="subpage-button">Termine ansehen <span class="material-icons-round" aria-hidden="true">south</span></a>
-                        <a href="../Termine/RLC1952_Poster_A2_QUER.pdf" class="subpage-button subpage-button--secondary" target="_blank" rel="noopener">Terminposter öffnen <span class="material-icons-round" aria-hidden="true">open_in_new</span></a>
+                        <a href="../Termine/RLC1952_Poster_A2_QUER.pdf" data-cms-href="page.posterHref" class="subpage-button subpage-button--secondary" target="_blank" rel="noopener">Terminposter öffnen <span class="material-icons-round" aria-hidden="true">open_in_new</span></a>
                     </div>
                 </div>
             </section>
@@ -41,11 +42,11 @@
                 <div class="subpage-title-row">
                     <div>
                         <span class="subpage-eyebrow">Jahresüberblick</span>
-                        <h2 id="jahresueberblick-title" class="subpage-title">Aktuelle Veranstaltungen.</h2>
-                    </div>
-                </div>
-                <p class="events-empty-note" id="events-empty-note" hidden>Aktuell sind keine bevorstehenden Termine sichtbar. Vergangene Termine werden automatisch ausgeblendet.</p>
-                <div class="events-list" aria-label="RLC Termine 2026">
+                        <h2 id="jahresueberblick-title" class="subpage-title" data-cms="page.overviewTitle">Aktuelle Veranstaltungen.</h2>
+                                            </div>
+                                        </div>
+                                        <p class="events-empty-note" id="events-empty-note" hidden data-cms="page.emptyNote">Aktuell sind keine bevorstehenden Termine sichtbar. Vergangene Termine werden automatisch ausgeblendet.</p>
+                                        <div class="events-list" id="events-list" aria-label="RLC Termine 2026">
                     <article id="event-bodynostic-meeting" class="event-list-card" data-event-date="2026-05-09">
                         <time datetime="2026-05-09" class="event-list-card__date"><span>Sa</span><strong>09.05.2026</strong></time>
                         <div class="event-list-card__body">
@@ -128,8 +129,8 @@
             <section class="subpage-cta-band" aria-labelledby="events-cta-title">
                 <div class="subpage-cta-band__content">
                     <span class="subpage-kicker">Rückfragen</span>
-                    <h2 id="events-cta-title" class="subpage-panel__title">Fragen zu Anmeldung, Ort oder Ablauf?</h2>
-                    <p>Der Verein klärt Details zu den Veranstaltungen direkt über den zentralen Kontaktweg.</p>
+                    <h2 id="events-cta-title" class="subpage-panel__title" data-cms="page.ctaTitle">Fragen zu Anmeldung, Ort oder Ablauf?</h2>
+                                        <p data-cms="page.ctaText">Der Verein klärt Details zu den Veranstaltungen direkt über den zentralen Kontaktweg.</p>
                 </div>
                 <div class="subpage-cta-band__actions">
                     <a href="contact.html#contact" class="subpage-button">Kontakt aufnehmen <span class="material-icons-round" aria-hidden="true">arrow_forward</span></a>
@@ -140,21 +141,85 @@
     <footer data-shared-footer-placeholder></footer>
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const today = new Date();
-            today.setHours(0, 0, 0, 0);
-            const cards = Array.from(document.querySelectorAll('[data-event-date]'));
-            let visibleCount = 0;
-            cards.forEach((card) => {
-                const date = new Date(`${card.dataset.eventDate}T00:00:00`);
-                const isPast = date < today;
-                card.classList.toggle('event-list-card--past', isPast);
-                card.hidden = isPast;
-                if (!isPast) visibleCount += 1;
+            document.addEventListener('DOMContentLoaded', () => {
+                const escapeHtml = (value) => (value || '')
+                    .toString()
+                    .replace(/&/g, '&amp;')
+                    .replace(/</g, '&lt;')
+                    .replace(/>/g, '&gt;')
+                    .replace(/"/g, '&quot;')
+                    .replace(/'/g, '&#39;');
+                const slugify = (value) => (value || '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+                const rootPath = (value) => (typeof value === 'string' && value && (value.charAt(0) !== '/' && value.indexOf('://') === -1)) ? `/${value}` : value;
+
+                const weekdayFormatter = new Intl.DateTimeFormat('de-DE', { weekday: 'short' });
+                const dateFormatter = new Intl.DateTimeFormat('de-DE', { day: '2-digit', month: '2-digit', year: 'numeric' });
+                const longDateFormatter = new Intl.DateTimeFormat('de-DE', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+
+                const buildCard = (item) => {
+                    const isoDate = item.date || '';
+                    const eventDate = new Date(`${isoDate}T00:00:00`);
+                    const link = (item.link && item.link.href && item.link.label)
+                        ? `<a href="${escapeHtml(rootPath(item.link.href))}" class="subpage-inline-link">${escapeHtml(item.link.label)} <span class="material-icons-round" aria-hidden="true">article</span></a>`
+                        : '';
+                    return `
+                        <article id="event-${escapeHtml(slugify(item.title || ''))}" class="event-list-card${item.featured ? ' event-list-card--featured' : ''}" data-event-date="${escapeHtml(isoDate)}">
+                            <time datetime="${escapeHtml(isoDate)}" class="event-list-card__date"><span>${escapeHtml(weekdayFormatter.format(eventDate))}</span><strong>${escapeHtml(dateFormatter.format(eventDate))}</strong></time>
+                            <div class="event-list-card__body">
+                                <span class="subpage-kicker">${escapeHtml(item.kicker || '')}</span>
+                                <h3>${escapeHtml(item.title || '')}</h3>
+                                <p>${escapeHtml(item.teaser || '')}</p>
+                                <dl class="event-detail-list">
+                                    <div><dt>Was</dt><dd>${escapeHtml(item.was || '')}</dd></div>
+                                    <div><dt>Wann</dt><dd>${escapeHtml(longDateFormatter.format(eventDate))}</dd></div>
+                                    <div><dt>Wo</dt><dd>${escapeHtml(item.wo || '')}</dd></div>
+                                    <div><dt>Wer</dt><dd>${escapeHtml(item.wer || '')}</dd></div>
+                                    <div><dt>Anmeldung</dt><dd>${escapeHtml(item.anmeldung || '')}</dd></div>
+                                </dl>
+                                ${link}
+                            </div>
+                        </article>
+                    `;
+                };
+
+                const applyPastFilter = () => {
+                    const today = new Date();
+                    today.setHours(0, 0, 0, 0);
+                    const cards = Array.from(document.querySelectorAll('[data-event-date]'));
+                    let visibleCount = 0;
+                    cards.forEach((card) => {
+                        const date = new Date(`${card.dataset.eventDate}T00:00:00`);
+                        const isPast = date < today;
+                        card.classList.toggle('event-list-card--past', isPast);
+                        card.hidden = isPast;
+                        if (!isPast) visibleCount += 1;
+                    });
+                    const emptyNote = document.getElementById('events-empty-note');
+                    if (emptyNote) emptyNote.hidden = visibleCount !== 0;
+                };
+
+                const bootEvents = () => {
+                    const source = window.rlcCmsData && window.rlcCmsData.events;
+                    const termine = source && Array.isArray(source.termine) ? source.termine : [];
+                    const list = document.getElementById('events-list');
+                    if (list && termine.length > 0) {
+                        list.innerHTML = termine.map(buildCard).join('');
+                    }
+                    applyPastFilter();
+                };
+
+                const onEventData = (event) => {
+                    if (event.detail && event.detail.page === 'events') {
+                        document.removeEventListener('rlc:cms-data', onEventData);
+                        bootEvents();
+                    }
+                };
+                if (window.rlcCmsData && window.rlcCmsData.events) {
+                    bootEvents();
+                } else {
+                    document.addEventListener('rlc:cms-data', onEventData);
+                }
             });
-            const emptyNote = document.getElementById('events-empty-note');
-            if (emptyNote) emptyNote.hidden = visibleCount !== 0;
-        });
-    </script>
+        </script>
 </body>
 </html>

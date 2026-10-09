@@ -22,7 +22,9 @@
     <link href="assets/css/homepage.css?v=12" rel="stylesheet" />
     <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
     <script src="assets/js/news_data.js"></script>
-    <script src="assets/js/components.js?v=3"></script>
+        <script src="assets/js/components.js?v=3"></script>
+        <script src="assets/js/cms_content.js?v=1" data-cms-src="assets/data/home.json" data-cms-page="home"></script>
+        <script src="assets/js/cms_content.js?v=1" data-cms-src="assets/data/events.json" data-cms-page="termine"></script>
     <script type="speculationrules">
     {
       "prerender": [
@@ -69,7 +71,7 @@
             <button type="button" class="sportabzeichen-drawer__toggle" data-drawer-toggle aria-expanded="false"
                 aria-controls="sportabzeichen-drawer-panel">
                 <span class="sportabzeichen-drawer__toggle-label">Termine</span>
-                <span class="sportabzeichen-drawer__toggle-meta" id="sportabzeichen-drawer-count">5 Termine</span>
+                <span class="sportabzeichen-drawer__toggle-meta" id="sportabzeichen-drawer-count">Termine</span>
             </button>
 
             <aside class="sportabzeichen-drawer__panel" id="sportabzeichen-drawer-panel"
@@ -97,19 +99,19 @@
         <section class="home-hero" aria-labelledby="home-hero-title">
         <div class="home-hero__media" aria-hidden="true">
             <img src="assets/images/rlc-hero-stadion.jpg"
-                alt="Leichtathletik-Stadion in Recklinghausen mit Laufbahn" width="1757" height="920" loading="eager" decoding="async">
-            <small class="home-hero__photo-copyright">© RVR, 2020, DL-DE/BY-2-0</small>
+                            alt="Leichtathletik-Stadion in Recklinghausen mit Laufbahn" width="1757" height="920" loading="eager" decoding="async" data-cms-img="hero.image">
+                        <small class="home-hero__photo-copyright" data-cms="hero.image.copyright">© RVR, 2020, DL-DE/BY-2-0</small>
         </div>
         <div class="home-hero__inner">
             <div class="home-hero__content">
                 <span class="home-kicker">
-                    <span>Recklinghausen</span>
-                    <strong>Leichtathletik lebt hier</strong>
-                </span>
-                <h1 id="home-hero-title" class="home-hero__title home-display">
-                    Recklingh&auml;user<br><em>Leichtathletik Club.</em>
-                </h1>
-                <p class="home-hero__lead">
+                                    <span data-cms="hero.kickerCity">Recklinghausen</span>
+                                    <strong data-cms="hero.kickerClaim">Leichtathletik lebt hier</strong>
+                                </span>
+                                <h1 id="home-hero-title" class="home-hero__title home-display">
+                                    <span data-cms="hero.titleLine1">Recklingh&auml;user</span><br><em data-cms="hero.titleLine2">Leichtathletik Club.</em>
+                                </h1>
+                                <p class="home-hero__lead" data-cms="hero.lead">
                     Der Recklinghäuser Leichtathletik Club 1952 e.V. steht für engagiertes Training,
                     nachhaltige Nachwuchsförderung und die Begeisterung für Bewegung – vom Kindertraining bis zum Seniorensport.
                 </p>
@@ -130,7 +132,7 @@
                 <div class="home-news__stack">
                     <div class="home-news__intro">
                         <span class="home-section-label">Aktuelles</span>
-                        <h2 id="home-news-title" class="home-news__title home-display">Aktuelle Meldungen aus dem Verein.</h2>
+                        <h2 id="home-news-title" class="home-news__title home-display" data-cms="newsSectionTitle">Aktuelle Meldungen aus dem Verein.</h2>
                     </div>
                     <div id="index-news-container" class="home-news__grid" aria-live="polite">
                         <article class="home-news-card" data-size="compact" aria-hidden="true">
@@ -170,7 +172,7 @@
 
                 <aside class="home-news-aside">
                     <section class="home-panel" aria-labelledby="home-dates-title">
-                        <h3 id="home-dates-title">N&auml;chste Termine</h3>
+                        <h3 id="home-dates-title" data-cms="datesPanelTitle">N&auml;chste Termine</h3>
                         <div class="home-timeline" id="home-dates-timeline"></div>
                         <a class="home-link" href="pages/events.html">
                             Alle Termine im &Uuml;berblick <span class="material-icons-round" aria-hidden="true">arrow_forward</span>
@@ -178,8 +180,8 @@
                     </section>
 
                     <section class="home-panel" aria-labelledby="home-shortcuts-title">
-                        <h3 id="home-shortcuts-title">Schnelle Wege</h3>
-                        <div class="home-list-links">
+                        <h3 id="home-shortcuts-title" data-cms="shortcutsTitle">Schnelle Wege</h3>
+                                                <div class="home-list-links" id="home-shortcuts-list">
                             <a class="home-list-link" href="pages/training.html"><span>Training &amp; Gruppen</span><span>Zur Übersicht</span></a>
                             <a class="home-list-link" href="pages/sponsors.html"><span>Verein &amp; Vorstand</span><span>Zum Überblick</span></a>
                             <a class="home-list-link" href="pages/facilities.html"><span>Sportstätten</span><span>Orte ansehen</span></a>
@@ -191,9 +193,9 @@
 
             <section class="home-visit" aria-label="Rund um den Verein">
                 <div class="home-visit__intro">
-                    <span class="home-section-label">Rund um den Verein</span>
-                </div>
-                <div class="home-visit__grid home-visit__grid--seven">
+                                    <span class="home-section-label" data-cms="visitLabel">Rund um den Verein</span>
+                                </div>
+                                <div class="home-visit__grid home-visit__grid--seven" id="home-visit-grid">
                     <article class="home-partner-card">
                         <small>Termine</small>
                         <h3 class="home-display">Veranstaltungen im Überblick</h3>
@@ -321,51 +323,22 @@
     </script>
 
     <script>
-        window.homeTermine = [
-            {
-                isoDate: '2026-05-09',
-                title: '4. Bodynostic Meeting',
-                detail: 'Zentrale Wettkampfveranstaltung im Stadion Hohenhorst',
-                location: 'Stadion Hohenhorst',
-                href: 'pages/events.html#event-bodynostic-meeting'
-            },
-            {
-                isoDate: '2026-06-04',
-                title: '15. KidsCup Recklinghausen',
-                detail: 'Nachwuchsveranstaltung im Stadion Hohenhorst',
-                location: 'Stadion Hohenhorst',
-                href: 'pages/events.html#event-kidscup'
-            },
-            {
-                isoDate: '2026-08-28',
-                title: '9. Sparkassen Abendlauf',
-                detail: '5 km, 10 km und Kreismeisterschaften 10 km',
-                location: 'Stadion Hohenhorst & Außenbereich',
-                href: 'pages/events.html#event-abendlauf'
-            },
-            {
-                isoDate: '2026-09-19',
-                title: '43. Stadtmeisterschaften',
-                detail: 'Stadtmeisterschaften im Stadion Hohenhorst',
-                location: 'Stadion Hohenhorst',
-                href: 'pages/events.html#event-stadtmeisterschaften'
-            },
-            {
-                isoDate: '2026-12-31',
-                title: '39. Silvesterlauf',
-                detail: '5 km, 10 km, Nordic Walking und Walking',
-                location: 'Stadion Hohenhorst & Außenbereich',
-                href: 'pages/events.html#event-silvesterlauf'
-            }
-        ];
-    </script>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const termine = Array.isArray(window.homeTermine) ? [...window.homeTermine] : [];
-            if (termine.length === 0) {
-                return;
-            }
+            document.addEventListener('DOMContentLoaded', () => {
+                const slugify = (value) => (value || '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+                const bootTermine = () => {
+                const source = window.rlcCmsData && window.rlcCmsData.termine;
+                const termine = (source && Array.isArray(source.termine) ? source.termine : [])
+                    .map((item) => ({
+                        isoDate: item.date || '',
+                        title: item.title || '',
+                        detail: item.teaser || '',
+                        location: item.wo || '',
+                        href: `pages/events.html#event-${slugify(item.title || '')}`
+                    }))
+                    .filter((item) => item.isoDate);
+                if (termine.length === 0) {
+                    return;
+                }
 
             const parseEventDate = (value) => new Date(`${value}T00:00:00`);
             const shortDateFormatter = new Intl.DateTimeFormat('de-DE', {
@@ -451,10 +424,23 @@
             }
 
             if (homeDatesTimeline) {
-                homeDatesTimeline.innerHTML = sidebarTermine.map(createTimelineMarkup).join('');
-            }
-        });
-    </script>
+                            homeDatesTimeline.innerHTML = sidebarTermine.map(createTimelineMarkup).join('');
+                        }
+                        };
+
+                        const onTermineData = (event) => {
+                            if (event.detail && event.detail.page === 'termine') {
+                                document.removeEventListener('rlc:cms-data', onTermineData);
+                                bootTermine();
+                            }
+                        };
+                        if (window.rlcCmsData && window.rlcCmsData.termine) {
+                            bootTermine();
+                        } else {
+                            document.addEventListener('rlc:cms-data', onTermineData);
+                        }
+                    });
+                </script>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -597,8 +583,57 @@
             });
 
             window.setTimeout(showNotice, 420);
-        });
-    </script>
-</body>
+                    });
+                </script>
+
+                <script>
+                    document.addEventListener('DOMContentLoaded', () => {
+                        const escapeHtml = (value) => (value || '')
+                            .toString()
+                            .replace(/&/g, '&amp;')
+                            .replace(/</g, '&lt;')
+                            .replace(/>/g, '&gt;')
+                            .replace(/"/g, '&quot;');
+
+                        const bootHome = () => {
+                            const home = window.rlcCmsData && window.rlcCmsData.home;
+                            if (!home) {
+                                return;
+                            }
+
+                            const shortcuts = document.getElementById('home-shortcuts-list');
+                            if (shortcuts && Array.isArray(home.shortcuts)) {
+                                shortcuts.innerHTML = home.shortcuts.map((item) => `
+                                    <a class="home-list-link" href="${escapeHtml(item.href || '#')}"><span>${escapeHtml(item.label)}</span><span>${escapeHtml(item.cta)}</span></a>
+                                `).join('');
+                            }
+
+                            const grid = document.getElementById('home-visit-grid');
+                            if (grid && Array.isArray(home.visitCards)) {
+                                grid.innerHTML = home.visitCards.map((card) => `
+                                    <article class="home-partner-card">
+                                        <small>${escapeHtml(card.tag)}</small>
+                                        <h3 class="home-display">${escapeHtml(card.title)}</h3>
+                                        <p>${escapeHtml(card.text)}</p>
+                                        <a href="${escapeHtml(card.href || '#')}" class="home-link"${card.external ? ' target="_blank" rel="noopener"' : ''}>${escapeHtml(card.linkLabel)} <span class="material-icons-round" aria-hidden="true">${card.external ? 'open_in_new' : 'arrow_forward'}</span></a>
+                                    </article>
+                                `).join('');
+                            }
+                        };
+
+                        const onHomeData = (event) => {
+                            if (event.detail && event.detail.page === 'home') {
+                                document.removeEventListener('rlc:cms-data', onHomeData);
+                                bootHome();
+                            }
+                        };
+                        if (window.rlcCmsData && window.rlcCmsData.home) {
+                            bootHome();
+                        } else {
+                            document.addEventListener('rlc:cms-data', onHomeData);
+                        }
+                    });
+                </script>
+            </body>
 
 </html>

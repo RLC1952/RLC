@@ -23,9 +23,10 @@ Egal was der Nutzer dich bittet zu ändern, halte dich an diese Zuordnung:
 | Aufgabe / Anfrage des Nutzers | Richtige Datei / Aktion | Wichtige Regel |
 | :--- | :--- | :--- |
 | **Neuer Blog-/Newsbeitrag** | `python tools/add_news.py --title "..." --text "..." [--image "..."]` | **NIEMALS** `pages/news/*.html` manuell editieren! Das Skript generiert alles automatisch. |
-| **Trainingszeiten / Gruppen** | `assets/js/training_schedule.js` & `pages/training.html` | Zeiten & Filter liegen im JS-Objekt. Syntax mit `node --check` prüfen! |
-| **Trainerteam (Namen, Fotos)** | `pages/team.html` | Trainer-Kacheln direkt im HTML anpassen. Fotos liegen in `assets/images/trainer/`. |
-| **Termine & Wettkämpfe** | `pages/events.html` | Termine direkt in der Kachelliste pflegen. |
+| **Trainingszeiten / Gruppen** | `assets/data/training.json` (CMS „Trainingszeiten & Sportgruppen") & `pages/training.html` | Zeiten liegen als CMS-pflegbares JSON; `assets/js/training_schedule.js` ist nur noch Lader. JSON-Syntax statt node --check prüfen! |
+| **Trainerteam (Namen, Fotos)** | `assets/data/team.json` + `assets/data/training.json` (CMS „Trainerteam") | Kacheln werden aus beiden JSONs gerendert; Fotos via CMS in `assets/images/trainer/`. Kein Hand-Edit der Kacheln in `pages/team.html`. |
+| **Termine & Wettkämpfe** | `assets/data/events.json` (CMS „Termine & Wettkämpfe") | Kacheln + Startseiten-Termindrawer rendern aus JSON; Poster-PDF via CMS-Medien. Kein Hand-Edit der Kacheln. |
+| **Startseite (Texte/Bilder)** | `assets/data/home.json` (CMS „Startseite") | Hero, Karten „Rund um den Verein" und Schnellzugriffe rendern aus JSON. |
 | **Verein, Vorstand, Satzung** | `pages/sponsors.html`, `pages/satzung.html`, `assets/pdf/` | PDFs für Downloads immer in `assets/pdf/` ablegen. |
 | **Kontakt, Impressum, Datenschutz** | `pages/contact.html`, `pages/impressum.html`, `pages/datenschutz.html` | Texte direkt in der jeweiligen HTML-Datei ändern. |
 | **Menü & Fußzeile (Header/Footer)** | `assets/js/components.js` | Wird auf allen 800+ Seiten dynamisch injiziert. Niemals Header in Unterseiten hardcoden! |
@@ -46,7 +47,7 @@ Befolge bei JEDEM Auftrag diesen Ablauf:
 1. **Änderung umsetzen** (Datei bearbeiten oder `tools/add_news.py` ausführen).
 2. **Selbsttest durchführen:**
    - `node --check assets/js/components.js` (falls JS berührt)
-   - `node --check assets/js/training_schedule.js` (falls Trainingsplan berührt)
+   - `node --check assets/js/cms_content.js` + JSON-Prüfung der `assets/data/*.json` (falls Daten-Dateien berührt)
    - `git diff --check`
 3. **Veröffentlichen:**
    - `git add <betroffene Dateien>`

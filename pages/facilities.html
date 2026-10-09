@@ -22,7 +22,7 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet" />
     <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
     <script src="../assets/js/components.js?v=3"></script>
-    <script src="../assets/js/training_schedule.js?v=3"></script>
+    <script src="../assets/js/training_schedule.js?v=4" data-training-src="../assets/data/training.json"></script>
 </head>
 <body class="subpage subpage-facilities min-h-screen">
     <header data-shared-shell-placeholder></header>
@@ -58,9 +58,10 @@
     <footer data-shared-footer-placeholder></footer>
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const schedule = Array.isArray(window.trainingSchedule) ? window.trainingSchedule : [];
-            const grid = document.getElementById('facilities-grid');
+            document.addEventListener('DOMContentLoaded', () => {
+                const bootFacilities = () => {
+                const schedule = Array.isArray(window.trainingSchedule) ? window.trainingSchedule : [];
+                const grid = document.getElementById('facilities-grid');
             const metaRow = document.getElementById('facilities-meta-row');
 
             const unique = (values) => [...new Set(values.filter(Boolean))];
@@ -159,8 +160,20 @@
                     </div>
                 </article>
             `).join('');
-        });
-    </script>
+
+                        };
+
+                        const onTrainingData = () => {
+                            document.removeEventListener('rlc:training-data', onTrainingData);
+                            bootFacilities();
+                        };
+                        if (window.trainingSchedule) {
+                            bootFacilities();
+                        } else {
+                            document.addEventListener('rlc:training-data', onTrainingData);
+                        }
+                    });
+                </script>
 </body>
 </html>
 

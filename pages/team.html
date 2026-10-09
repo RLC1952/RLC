@@ -22,7 +22,8 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet" />
     <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
     <script src="../assets/js/components.js?v=3"></script>
-    <script src="../assets/js/training_schedule.js?v=3"></script>
+    <script src="../assets/js/training_schedule.js?v=4" data-training-src="../assets/data/training.json"></script>
+    <script src="../assets/js/cms_content.js?v=1" data-cms-src="../assets/data/team.json" data-cms-page="team"></script>
 </head>
 <body class="subpage subpage-team min-h-screen">
     <header data-shared-shell-placeholder></header>
@@ -31,8 +32,8 @@
             <section class="subpage-intro subpage-intro--visual" aria-labelledby="team-page-title">
                 <div class="subpage-intro__content">
                     <span class="subpage-eyebrow">Trainerteam</span>
-                    <h1 id="team-page-title" class="subpage-display">Unser Trainerteam im Überblick.</h1>
-                    <p class="subpage-lead">Hier findest du die Trainerinnen und Trainer, die aktuell unsere Gruppen begleiten, mit ihren Einsatzbereichen.</p>
+                    <h1 id="team-page-title" class="subpage-display" data-cms="page.title">Unser Trainerteam im Überblick.</h1>
+                                        <p class="subpage-lead" data-cms="page.lead">Hier findest du die Trainerinnen und Trainer, die aktuell unsere Gruppen begleiten, mit ihren Einsatzbereichen.</p>
                     <div class="subpage-meta-row" id="team-meta-row" aria-label="Schnellüberblick zum Trainerteam"></div>
                     <div class="subpage-actions">
                         <a href="#team-directory-title" class="subpage-button">Zum Trainerteam <span class="material-icons-round" aria-hidden="true">arrow_forward</span></a>
@@ -40,7 +41,7 @@
                     </div>
                 </div>
                 <figure class="subpage-intro__visual">
-                    <img src="../assets/images/rlc-team-nachwuchs.jpg" alt="RLC-Gruppe beim gemeinsamen Training" width="1261" height="945" loading="lazy" decoding="async" />
+                    <img src="../assets/images/rlc-team-nachwuchs.jpg" alt="RLC-Gruppe beim gemeinsamen Training" width="1261" height="945" loading="lazy" decoding="async" data-cms-img="page.introImage" />
                 </figure>
             </section>
 
@@ -49,7 +50,7 @@
                     <div class="subpage-title-row subpage-surface__header">
                         <div>
                             <span class="subpage-eyebrow">Teamverzeichnis</span>
-                            <h2 id="team-directory-title" class="subpage-title">Trainerteam mit Gruppen und Einsatzbereichen.</h2>
+                            <h2 id="team-directory-title" class="subpage-title" data-cms="page.directoryTitle">Trainerteam mit Gruppen und Einsatzbereichen.</h2>
                         </div>
                         <div class="subpage-chip-row" role="group" aria-label="Sortierung des Trainerteams">
                             <button type="button" class="subpage-chip team-sort is-active" data-team-sort="name" aria-pressed="true">Nach Nachname</button>
@@ -63,8 +64,8 @@
             <section class="subpage-cta-band" aria-labelledby="team-cta-title">
                 <div class="subpage-cta-band__content">
                     <span class="subpage-kicker">Einstieg</span>
-                    <h2 id="team-cta-title" class="subpage-panel__title">Noch nicht sicher, welche Gruppe passt?</h2>
-                    <p>Eine kurze Nachricht mit Alter, Ziel und Vorerfahrung reicht aus. Dann landet die Anfrage direkt beim passenden Bereich.</p>
+                    <h2 id="team-cta-title" class="subpage-panel__title" data-cms="page.ctaTitle">Noch nicht sicher, welche Gruppe passt?</h2>
+                                        <p data-cms="page.ctaText">Eine kurze Nachricht mit Alter, Ziel und Vorerfahrung reicht aus. Dann landet die Anfrage direkt beim passenden Bereich.</p>
                 </div>
                 <div class="subpage-cta-band__actions">
                     <a href="contact.html#contact" class="subpage-button">Anfrage senden <span class="material-icons-round" aria-hidden="true">arrow_forward</span></a>
@@ -76,11 +77,12 @@
     <footer data-shared-footer-placeholder></footer>
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const schedule = Array.isArray(window.trainingSchedule) ? window.trainingSchedule : [];
-            const meta = window.trainingScheduleMeta || {};
+            document.addEventListener('DOMContentLoaded', () => {
+                const bootTeam = () => {
+                const schedule = Array.isArray(window.trainingSchedule) ? window.trainingSchedule : [];
+                const meta = window.trainingScheduleMeta || {};
 
-            const metaRow = document.getElementById('team-meta-row');
+                const metaRow = document.getElementById('team-meta-row');
             const grid = document.getElementById('team-card-grid');
 
             const unique = (values) => [...new Set(values.filter(Boolean))];
@@ -95,11 +97,18 @@
                 return code === 'SS' ? 'S.' : code;
             };
 
-            // Zuordnung Trainer -> Porträtfoto (Stand 12.08.2026). Trainer ohne Foto erhalten den Initialen-Platzhalter.
-            const TRAINER_PHOTOS = {
-                'Ludger Zander': '../assets/images/trainer/trainer-ludger-zander.webp',
-                'Ulrich Moschner': '../assets/images/trainer/trainer-ulrich-moschner.webp'
-            };
+            // Zuordnung Trainer -> Porträtfoto aus assets/data/team.json (CMS-pflegbar).
+                                    // Wird beim Rendern frisch gelesen; Trainer ohne Foto erhalten den Initialen-Platzhalter.
+                                    const getTrainerPhotos = () => {
+                                        const data = window.rlcCmsData && window.rlcCmsData.team;
+                                        const map = {};
+                                        (data && Array.isArray(data.trainerPhotos) ? data.trainerPhotos : []).forEach((entry) => {
+                                            if (entry && entry.name && entry.image) {
+                                                map[entry.name] = entry.image.charAt(0) === '/' ? entry.image : `/${entry.image}`;
+                                            }
+                                        });
+                                        return map;
+                                    };
 
             const classifyTrainer = (entries) => {
                 const groups = entries.map((entry) => entry.group);
@@ -190,8 +199,8 @@
                 return `
                     <article class="subpage-person-card">
                         <div class="subpage-person-card__media">
-                            ${TRAINER_PHOTOS[trainer]
-                                ? `<img class="subpage-person-card__image" src="${TRAINER_PHOTOS[trainer]}" alt="${trainer}" width="900" height="1200" loading="lazy" decoding="async" />`
+                            ${getTrainerPhotos()[trainer]
+                                ? `<img class="subpage-person-card__image" src="${getTrainerPhotos()[trainer]}" alt="${trainer}" width="900" height="1200" loading="lazy" decoding="async" />`
                                 : `<div class="subpage-person-card__image subpage-person-card__image--placeholder" aria-hidden="true">${initials(trainer)}</div>`}
                             <span class="subpage-person-card__badge">${badge}</span>
                         </div>
@@ -224,21 +233,46 @@
             }).join('');
             };
 
-            renderGrid(trainers);
+            let currentSort = 'name';
+                        renderGrid(trainers);
 
-            const sortButtons = Array.from(document.querySelectorAll('.team-sort'));
-            sortButtons.forEach((button) => {
-                button.addEventListener('click', () => {
-                    sortButtons.forEach((other) => {
-                        const active = other === button;
-                        other.classList.toggle('is-active', active);
-                        other.setAttribute('aria-pressed', active ? 'true' : 'false');
-                    });
-                    renderGrid(sortedTrainers(button.dataset.teamSort));
-                });
-            });
-        });
-    </script>
+                        const sortButtons = Array.from(document.querySelectorAll('.team-sort'));
+                        sortButtons.forEach((button) => {
+                            button.addEventListener('click', () => {
+                                sortButtons.forEach((other) => {
+                                    const active = other === button;
+                                    other.classList.toggle('is-active', active);
+                                    other.setAttribute('aria-pressed', active ? 'true' : 'false');
+                                });
+                                currentSort = button.dataset.teamSort;
+                                renderGrid(sortedTrainers(currentSort));
+                            });
+                        });
+
+                        const onTeamData = (event) => {
+                            if (event.detail && event.detail.page === 'team') {
+                                document.removeEventListener('rlc:cms-data', onTeamData);
+                                renderGrid(sortedTrainers(currentSort));
+                            }
+                        };
+                        if (window.rlcCmsData && window.rlcCmsData.team) {
+                            renderGrid(sortedTrainers(currentSort));
+                        } else {
+                            document.addEventListener('rlc:cms-data', onTeamData);
+                        }
+                        };
+
+                                const onTrainingData = () => {
+                                    document.removeEventListener('rlc:training-data', onTrainingData);
+                                    bootTeam();
+                                };
+                                if (window.trainingSchedule) {
+                                    bootTeam();
+                                } else {
+                                    document.addEventListener('rlc:training-data', onTrainingData);
+                                }
+                            });
+                        </script>
 </body>
 </html>
 

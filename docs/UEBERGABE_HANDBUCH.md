@@ -87,7 +87,8 @@ happy-chandrasekhar/
 │   ├── js/
 │   │   ├── components.js           # Gemeinsamer Header & Footer (Shared Shell)
 │   │   ├── news_data.js            # Kompaktes JSON/JS-Array der neuesten 36 Artikel
-│   │   └── training_schedule.js    # Trainingszeiten-Daten & interaktiver Filter
+│   │   ├── cms_content.js         # Lader für CMS-Daten assets/data/*.json
+│   │   └── training_schedule.js   # Lader für assets/data/training.json
 │   ├── images/                     # Vereinsfotos, Trainerporträts, Icons
 │   └── pdf/                        # Satzung, Schutzkonzept, Aufnahmeantrag, Zeiten
 │
@@ -443,14 +444,14 @@ Alle Navigationslinks des Kopfmenüs und des Footers werden zentral gesteuert.
 ---
 
 ### 5.2 Trainingszeiten und Gruppen (`assets/js/training_schedule.js`)
-Die Trainingszeiten werden interaktiv auf `pages/training.html` dargestellt. Die Datenbasis liegt in `assets/js/training_schedule.js`:
+Die Trainingszeiten werden interaktiv auf `pages/training.html` dargestellt. Die Datenbasis liegt in `assets/data/training.json` (im Pages CMS unter „Trainingszeiten & Sportgruppen" pflegbar); `assets/js/training_schedule.js` ist nur noch der Lader:
 - Jede Trainingsgruppe ist ein strukturiertes Objekt mit:
   - `group`: Name der Gruppe (z.B. `U10 (Kinder 8-9 Jahre)`)
   - `days`: Wochentage & Uhrzeiten
   - `coach`: Verantwortlicher Trainer / Ansprechpartner
   - `location`: Sportstätte (z.B. `Campus Blumenthal`, `Hohenhorst`)
   - `category`: Filter-Kategorie (`nachwuchs`, `jugend`, `erwachsene`, `wettkampf`)
-- Änderungen von Hallen- auf Sommerzeiten können direkt in diesem Datenobjekt gepflegt werden. Anschließend `node --check assets/js/training_schedule.js` ausführen.
+- Änderungen von Hallen- auf Sommerzeiten werden im Pages CMS (Rubrik „Trainingszeiten & Sportgruppen") oder direkt in `assets/data/training.json` gepflegt. Danach die JSON-Syntax prüfen.
 
 ---
 

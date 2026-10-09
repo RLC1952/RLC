@@ -1,0 +1,34 @@
+{
+  "hero": {
+    "kickerCity": "Recklinghausen",
+    "kickerClaim": "Leichtathletik lebt hier",
+    "titleLine1": "Recklinghäuser",
+    "titleLine2": "Leichtathletik Club.",
+    "lead": "Der Recklinghäuser Leichtathletik Club 1952 e.V. steht für engagiertes Training, nachhaltige Nachwuchsförderung und die Begeisterung für Bewegung – vom Kindertraining bis zum Seniorensport.",
+    "image": {
+      "src": "assets/images/rlc-hero-stadion.jpg",
+      "alt": "Leichtathletik-Stadion in Recklinghausen mit Laufbahn",
+      "copyright": "© RVR, 2020, DL-DE/BY-2-0"
+    }
+  },
+  "newsSectionTitle": "Aktuelle Meldungen aus dem Verein.",
+  "datesPanelTitle": "Nächste Termine",
+  "shortcutsTitle": "Schnelle Wege",
+  "shortcuts": [
+    {"label": "Training & Gruppen", "cta": "Zur Übersicht", "href": "pages/training.html"},
+    {"label": "Verein & Vorstand", "cta": "Zum Überblick", "href": "pages/sponsors.html"},
+    {"label": "Sportstätten", "cta": "Orte ansehen", "href": "pages/facilities.html"},
+    {"label": "Kontakt zum Verein", "cta": "Jetzt schreiben", "href": "pages/contact.html"}
+  ],
+  "visitLabel": "Rund um den Verein",
+  "visitCards": [
+    {"tag": "Termine", "title": "Veranstaltungen im Überblick", "text": "Datum, Ort und Anmeldung.", "linkLabel": "Termine ansehen", "href": "pages/events.html", "external": false},
+    {"tag": "Training", "title": "Zeiten, Gruppen & Orte", "text": "Angebote für Kinder, Jugendliche und Erwachsene.", "linkLabel": "Training ansehen", "href": "pages/training.html", "external": false},
+    {"tag": "Verein", "title": "Verein & Vorstand", "text": "Vorstand, Partner und Dokumente.", "linkLabel": "Verein öffnen", "href": "pages/sponsors.html", "external": false},
+    {"tag": "Trainerteam", "title": "Unser Team im Überblick", "text": "Trainerinnen und Trainer.", "linkLabel": "Trainerteam ansehen", "href": "pages/team.html", "external": false},
+    {"tag": "Sportstätten", "title": "Stadion, Hallen & Kursräume", "text": "Adressen und Google Maps.", "linkLabel": "Sportstätten ansehen", "href": "pages/facilities.html", "external": false},
+    {"tag": "Bildergalerie", "title": "Training, Wettkampf & Vereinsleben", "text": "Ausgewählte Bilder nach Anlass sortiert.", "linkLabel": "Bilder ansehen", "href": "pages/gallery.html", "external": false},
+    {"tag": "Einstieg", "title": "Probetraining & Kontakt", "text": "Probetraining oder Frage senden.", "linkLabel": "Kontakt aufnehmen", "href": "pages/contact.html#contact", "external": false},
+    {"tag": "Instagram", "title": "Aktuelles aus dem Vereinsalltag", "text": "Aktuelle Einblicke aus dem Vereinsalltag.", "linkLabel": "Instagram öffnen", "href": "https://www.instagram.com/rlc_1952/", "external": true}
+  ]
+}
