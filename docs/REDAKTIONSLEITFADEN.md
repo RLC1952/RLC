@@ -180,16 +180,16 @@ Viele kennen aus früheren Zeiten Systeme wie TinaCMS, WordPress oder Joomla. F�
 
 ### 3.2 Schritt-für-Schritt im Browser arbeiten
 1. **Einloggen:**  
-   Rufen Sie [https://pagescms.org](https://pagescms.org) auf und melden Sie sich mit Ihrem Vereins-Login (oder GitHub-Konto) an.
+   Rufen Sie [https://app.pagescms.org](https://app.pagescms.org) auf und melden Sie sich mit Ihrem Vereins-Login (oder GitHub-Konto) an.
 2. **Rubrik „Aktuelles / News“ auswählen:**  
    In der linken Leiste sehen Sie die Inhaltsbereiche unserer Website. Klicken Sie auf **„Aktuelles“**.
 3. **Neuen Beitrag anlegen:**  
    Klicken Sie oben rechts auf den grünen Button **„+ Neuer Beitrag“**.
 4. **Maske ausfüllen:**  
-   - **Titel:** Geben Sie Ihre kurze, aussagekräftige Überschrift ein.
-   - **Datum:** Wählen Sie das Datum im Kalender oder belassen Sie das heutige Datum.
+   - **Titel:** Geben Sie Ihre kurze, aussagekräftige Überschrift ein (wird automatisch in Großbuchstaben gesetzt).
+   - **Datum:** Geben Sie das Datum als Text ein, z. B. `9. Oktober 2026`.
    - **Hauptbild:** Klicken Sie auf das Bild-Feld und wählen Sie Ihr Querformat-Foto von Ihrem Computer aus.
-   - **Text:** Schreiben Sie Ihren Text in das Editor-Feld. Sie können Zwischenüberschriften setzen und Absätze anlegen.
+   - **Text:** Schreiben Sie Ihren Text in das Editor-Feld. Trennen Sie Absätze mit einer Leerzeile.
 5. **Veröffentlichen:**  
    Klicken Sie auf **„Speichern & Veröffentlichen“**. Innerhalb von ein bis zwei Minuten ist Ihr Beitrag live auf der Website zu sehen!
 

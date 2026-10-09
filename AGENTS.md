@@ -22,7 +22,7 @@ Egal was der Nutzer dich bittet zu ändern, halte dich an diese Zuordnung:
 
 | Aufgabe / Anfrage des Nutzers | Richtige Datei / Aktion | Wichtige Regel |
 | :--- | :--- | :--- |
-| **Neuer Blog-/Newsbeitrag** | `python tools/add_news.py --title "..." --text "..." [--image "..."]` | **NIEMALS** `pages/news/*.html` manuell editieren! Das Skript generiert alles automatisch. |
+| **Neuer Blog-/Newsbeitrag** | Redakteure: Pages CMS (`app.pagescms.org`, Rubrik „Aktuelles / News"). KI/Terminal: `python tools/add_news.py --title "..." --text "..." [--image "..."]` | **NIEMALS** `pages/news/*.html` manuell editieren! Der Workflow `.github/workflows/regen-news.yml` regeneriert nach jedem Commit an `news_archive.json` automatisch (inkl. `tools/normalize_news.py`). |
 | **Trainingszeiten / Gruppen** | `assets/js/training_schedule.js` & `pages/training.html` | Zeiten & Filter liegen im JS-Objekt. Syntax mit `node --check` prüfen! |
 | **Trainerteam (Namen, Fotos)** | `pages/team.html` | Trainer-Kacheln direkt im HTML anpassen. Fotos liegen in `assets/images/trainer/`. |
 | **Termine & Wettkämpfe** | `pages/events.html` | Termine direkt in der Kachelliste pflegen. |

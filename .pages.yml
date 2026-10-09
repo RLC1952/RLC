@@ -1,47 +1,74 @@
-# PagesCMS Configuration for RLC 1952 Recklinghausen
-# Zero-Build Web CMS integration via pagescms.org
-
+# Pages CMS Konfiguration für RLC 1952 Recklinghausen
+# Wird von https://app.pagescms.org gelesen (Redaktion über den Browser).
+# Generierung der Detailseiten + Übersichtsdaten übernimmt automatisch
+# .github/workflows/regen-news.yml nach jedem Commit an news_archive.json.
+#
+# WICHTIG: Alle Felder von news_archive.json (id, url, title, date,
+# content_text, content_html, images) MÜSSEN hier definiert bleiben!
+# Pages CMS schreibt beim Speichern nur die hier definierten Felder zurück —
+# fehlt ein Feld hier, würde es aus allen Beiträgen gelöscht werden.
 media:
-  input: news_assets
-  output: news_assets
+  - name: uploads
+    label: Bilder
+    input: assets/images/uploads
+    output: /assets/images/uploads
 
 content:
-  - name: news_archive
-    label: Vereinsberichte & Aktuelles
+  - name: news
+    label: Aktuelles / News
     type: file
     path: news_archive.json
     format: json
     list: true
     fields:
       - name: id
-        label: Artikel-ID
+        label: ID
         type: string
-        description: Eindeutige Nummer des Berichts (z.B. 10244)
+        readonly: true
+        description: Wird beim Veröffentlichen automatisch vergeben (fortlaufend).
+      - name: url
+        label: URL (intern)
+        type: string
+        readonly: true
+        hidden: true
       - name: title
-        label: Überschrift (Großbuchstaben, max. 70 Zeichen)
+        label: Titel
         type: string
         required: true
+        description: Kurz und aussagekräftig, max. 70 Zeichen. Wird beim Veröffentlichen automatisch in GROSSBUCHSTABEN gesetzt.
       - name: date
-        label: Datum (z.B. 03. September 2026)
+        label: Datum
         type: string
         required: true
+        pattern:
+          regex: '^[0-9]{1,2}\. (Januar|Februar|März|April|Mai|Juni|Juli|August|September|Oktober|November|Dezember) [0-9]{4}$'
+          message: "Bitte als deutsches Datum eingeben, z. B. 9. Oktober 2026"
+        description: Deutsches Datum mit Punkt, z. B. 9. Oktober 2026
       - name: content_text
-        label: Berichtstext (in 2-3 Absätze gliedern)
-        type: rich-text
+        label: Text
+        type: text
         required: true
+        description: Der Bericht in 2–3 Absätzen. Absätze durch eine Leerzeile trennen.
+      - name: content_html
+        label: HTML (intern)
+        type: text
+        hidden: true
       - name: images
-        label: Beigefügte Fotos (Querformat empfohlen)
-        type: list
+        label: Bilder (Querformat)
+        type: object
+        list: true
+        description: Das erste Bild wird das Hauptbild des Beitrags.
         fields:
+          - name: remote
+            label: Quelle (intern)
+            type: string
+            hidden: true
           - name: local
             label: Bilddatei
             type: image
-          - name: remote
-            label: Vollständige Web-Adresse
-            type: string
 
-  - name: training_schedule
-    label: Trainingszeiten & Sportgruppen
-    type: file
-    path: assets/js/training_schedule.js
-    format: code
+actions:
+  - name: regen-news
+    label: News neu generieren
+    workflow: regen-news.yml
+    cancelable: false

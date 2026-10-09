@@ -1,0 +1,56 @@
+# Regeneriert die News-Detailseiten und die Übersichtsdaten, sobald sich
+# news_archive.json ändert (z. B. durch Pages CMS). Danach committet der
+# Workflow die generierten Dateien; der Push triggert das Cloudflare-Deploy.
+name: News neu generieren (CMS)
+
+on:
+  push:
+    paths:
+      - "news_archive.json"
+  workflow_dispatch:
+    inputs:
+      payload:
+        description: "Pages CMS payload (optional)"
+        required: false
+        type: string
+
+permissions:
+  contents: write
+
+concurrency:
+  group: news-regen
+  cancel-in-progress: false
+
+jobs:
+  regen:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Python einrichten
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: News-Archiv normalisieren
+        run: python tools/normalize_news.py
+
+      - name: Detailseiten und JS-Daten generieren
+        run: |
+          python generate_detail_pages.py
+          python update_js_data.py
+
+      - name: Generierte Dateien committen
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if [ -z "$(git status --porcelain -- news_archive.json assets/js/news_data.js pages/news)" ]; then
+            echo "Keine Änderungen an den generierten Dateien - nichts zu committen."
+          else
+            git add news_archive.json assets/js/news_data.js pages/news
+            git commit -m "inhalt: News-Seiten automatisch regeneriert (Pages CMS)"
+            git push origin HEAD
+          fi
