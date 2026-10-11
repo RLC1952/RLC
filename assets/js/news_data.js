@@ -467,19 +467,5 @@ window.newsData = [
                 "local": "news_assets/10207/zoom_20260225183651_StaffelDM_Halle.jpeg"
             }
         ]
-    },
-    {
-        "url": "https://www.rlc1952.de/rlc.php?id=0-0000-0-10206",
-        "id": "10206",
-        "title": "RLC-SENIORENMANNSCHAFT SAMMELT BESTLEISTUNGEN",
-        "date": "22. Februar 2026",
-        "content_html": "<div class=\"preView\"><img alt=\"\" src=\"assets/images/uploads/zoom_20260222192134_Bianca-Nadine.jpeg\"/></div><p class=\"detailViewTop\"><b>Zur Vorbereitung auf die Deutschen Masters vom 06.03.-08.03.2026 im Düsseldorfer Arena-Park haben die RLC-Seniorinnen und -Senioren noch einmal an den Nordrhein-Masters am 21.02.2026 an gleicher Stelle teilgenommen.</b></p>",
-        "content_text": "Zur Vorbereitung auf die Deutschen Masters vom 06.03.-08.03.2026 im Düsseldorfer Arena-Park haben die RLC-Seniorinnen und -Senioren noch einmal an den Nordrhein-Masters am 21.02.2026 an gleicher Stelle teilgenommen.",
-        "images": [
-            {
-                "remote": "https://www.rlc1952.de/assets/images/uploads/zoom_20260222192134_Bianca-Nadine.jpeg",
-                "local": "news_assets/10206/zoom_20260222192134_Bianca-Nadine.jpeg"
-            }
-        ]
     }
 ];
