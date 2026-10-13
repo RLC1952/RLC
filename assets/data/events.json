@@ -43,7 +43,7 @@
       "wo": "Stadion Hohenhorst & Außenbereich",
       "wer": "Läuferinnen und Läufer",
       "anmeldung": "Über die Abendlauf-Seite und Ausschreibung.",
-      "featured": true,
+      "featured": false,
       "link": {"href": "pages/abendlauf.html", "label": "Zur Abendlauf-Seite"}
     },
     {
@@ -66,9 +66,9 @@
       "was": "Silvesterlauf mit Lauf- und Walking-Angeboten",
       "wo": "Stadion Hohenhorst & Außenbereich",
       "wer": "Läuferinnen, Läufer, Walking/Nordic-Walking",
-      "anmeldung": "Informationen kommen mit der Ausschreibung.",
-      "featured": false,
-      "link": {"href": "", "label": ""}
+	  "anmeldung": "https://my.raceresult.com/428609",
+      "featured": true,
+      "link": {"href": "pages/silvesterlauf26.html", "label": "Zur Veranstaltungs-Seite"}
     }
   ]
 }
