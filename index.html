@@ -333,7 +333,9 @@
                         title: item.title || '',
                         detail: item.teaser || '',
                         location: item.wo || '',
-                        href: `pages/events.html#event-${slugify(item.title || '')}`
+                        href: item.link && item.link.href
+                            ? item.link.href
+                            : `pages/events.html#event-${slugify(item.title || '')}`
                     }))
                     .filter((item) => item.isoDate);
                 if (termine.length === 0) {
