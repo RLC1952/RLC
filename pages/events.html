@@ -151,6 +151,18 @@
                     .replace(/'/g, '&#39;');
                 const slugify = (value) => (value || '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
                 const rootPath = (value) => (typeof value === 'string' && value && (value.charAt(0) !== '/' && value.indexOf('://') === -1)) ? `/${value}` : value;
+                const renderRegistration = (value) => {
+                    const registration = (value || '').toString();
+                    try {
+                        const url = new URL(registration);
+                        if (url.protocol === 'http:' || url.protocol === 'https:') {
+                            return `<a href="${escapeHtml(url.href)}" class="subpage-inline-link" target="_blank" rel="noopener">${escapeHtml(registration)} <span class="material-icons-round" aria-hidden="true">open_in_new</span></a>`;
+                        }
+                    } catch (error) {
+                        // Normal registration notes are displayed as plain text.
+                    }
+                    return escapeHtml(registration);
+                };
 
                 const weekdayFormatter = new Intl.DateTimeFormat('de-DE', { weekday: 'short' });
                 const dateFormatter = new Intl.DateTimeFormat('de-DE', { day: '2-digit', month: '2-digit', year: 'numeric' });
@@ -174,7 +186,7 @@
                                     <div><dt>Wann</dt><dd>${escapeHtml(longDateFormatter.format(eventDate))}</dd></div>
                                     <div><dt>Wo</dt><dd>${escapeHtml(item.wo || '')}</dd></div>
                                     <div><dt>Wer</dt><dd>${escapeHtml(item.wer || '')}</dd></div>
-                                    <div><dt>Anmeldung</dt><dd>${escapeHtml(item.anmeldung || '')}</dd></div>
+                                    <div><dt>Anmeldung</dt><dd>${renderRegistration(item.anmeldung)}</dd></div>
                                 </dl>
                                 ${link}
                             </div>
