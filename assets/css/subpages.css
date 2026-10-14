@@ -2372,6 +2372,30 @@ a.subpage-chip {
     text-transform: uppercase;
 }
 
+.event-poster {
+    display: grid;
+    gap: 0.75rem;
+    width: min(100%, 34rem);
+    margin-inline: auto;
+    padding: 0.75rem;
+    border: 1px solid color-mix(in srgb, var(--subpage-line) 76%, white);
+    background: color-mix(in srgb, white 90%, var(--subpage-paper));
+    box-shadow: 0 18px 36px rgba(8, 39, 39, 0.08);
+}
+
+.event-poster img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.event-poster figcaption {
+    color: var(--subpage-brand-strong);
+    font-size: 0.875rem;
+    font-weight: 700;
+    text-align: center;
+}
+
 @media (max-width: 900px) {
     .training-plan-notes,
     .event-gallery {
