@@ -21,7 +21,9 @@ from pathlib import Path
 
 ROOT_DIR = Path(__file__).resolve().parent.parent
 ARCHIVE_FILE = ROOT_DIR / "news_archive.json"
+CURRENT_FILE = ROOT_DIR / "news_current.json"
 NEWS_ASSETS_DIR = ROOT_DIR / "news_assets"
+MERGE_SCRIPT = ROOT_DIR / "tools" / "merge_news.py"
 GENERATE_SCRIPT = ROOT_DIR / "generate_detail_pages.py"
 UPDATE_SCRIPT = ROOT_DIR / "update_js_data.py"
 
@@ -47,20 +49,25 @@ def main():
 
     args = parser.parse_args()
 
+    if not CURRENT_FILE.exists():
+        print(f"FEHLER: {CURRENT_FILE} nicht gefunden!", file=sys.stderr)
+        sys.exit(1)
     if not ARCHIVE_FILE.exists():
         print(f"FEHLER: {ARCHIVE_FILE} nicht gefunden!", file=sys.stderr)
         sys.exit(1)
 
-    # 1. JSON sicher laden
+    # 1. JSON sicher laden (CMS-Datei news_current.json ist die Schreib-Quelle)
     try:
+        with open(CURRENT_FILE, "r", encoding="utf-8") as f:
+            current = json.load(f)
         with open(ARCHIVE_FILE, "r", encoding="utf-8") as f:
             archive = json.load(f)
     except Exception as e:
-        print(f"FEHLER beim Lesen von {ARCHIVE_FILE}: {e}", file=sys.stderr)
+        print(f"FEHLER beim Lesen der News-Dateien: {e}", file=sys.stderr)
         sys.exit(1)
 
-    # 2. Naechste ID ermitteln
-    existing_ids = [int(item["id"]) for item in archive if str(item.get("id", "")).isdigit()]
+    # 2. Naechste ID ermitteln (ueber beide Dateien, damit nichts kollidiert)
+    existing_ids = [int(item["id"]) for item in current + archive if str(item.get("id", "")).isdigit()]
     next_id = max(existing_ids) + 1 if existing_ids else 10000
     str_id = str(next_id)
 
@@ -113,26 +120,27 @@ def main():
         "images": images_list
     }
 
-    # 7. Vorne im Archiv einfuegen (neueste zuerst)
-    archive.insert(0, new_article)
+    # 7. Vorne in news_current.json einfuegen (neueste zuerst)
+    current.insert(0, new_article)
 
     # 8. Atomar speichern
-    tmp_file = ARCHIVE_FILE.with_suffix(".tmp")
+    tmp_file = CURRENT_FILE.with_suffix(".tmp")
     try:
         with open(tmp_file, "w", encoding="utf-8") as f:
-            json.dump(archive, f, ensure_ascii=False, indent=2)
-        shutil.move(tmp_file, ARCHIVE_FILE)
-        print(f"[+] news_archive.json aktualisiert (Artikel-ID: {str_id})")
+            json.dump(current, f, ensure_ascii=False, indent=2)
+        shutil.move(tmp_file, CURRENT_FILE)
+        print(f"[+] news_current.json aktualisiert (Artikel-ID: {str_id})")
     except Exception as e:
         if tmp_file.exists():
             tmp_file.unlink()
         print(f"FEHLER beim Speichern: {e}", file=sys.stderr)
         sys.exit(1)
 
-    # 9. Automatisch Detailseiten und news_data.js regenerieren
+    # 9. Automatisch Archiv spiegeln, Detailseiten und news_data.js regenerieren
     if not args.skip_gen:
         print("[*] Generiere Detailseite und aktualisiere JavaScript-Datenbestand...")
         try:
+            subprocess.run([sys.executable, str(MERGE_SCRIPT)], check=True, cwd=str(ROOT_DIR))
             subprocess.run([sys.executable, str(GENERATE_SCRIPT)], check=True, cwd=str(ROOT_DIR))
             subprocess.run([sys.executable, str(UPDATE_SCRIPT)], check=True, cwd=str(ROOT_DIR))
             print(f"[OK] Fertig! Neuer Artikel verfuegbar:")

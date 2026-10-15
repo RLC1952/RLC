@@ -1,12 +1,18 @@
 # Pages CMS Konfiguration für RLC 1952 Recklinghausen
 # Wird von https://app.pagescms.org gelesen (Redaktion über den Browser).
-# Generierung der Detailseiten + Übersichtsdaten übernimmt automatisch
-# .github/workflows/regen-news.yml nach jedem Commit an news_archive.json.
+# Die Rubrik „Aktuelles / News" pflegt NUR news_current.json (Beiträge ab 2025,
+# ~100 Stück) — damit die CMS-Liste klein und schnell bleibt.
+# Das große Archiv news_archive.json wird automatisch gespiegelt:
+# .github/workflows/regen-news.yml führt nach jedem Commit an news_current.json
+# oder news_archive.json tools/merge_news.py + normalize_news.py aus und
+# generiert die Detailseiten + Übersichtsdaten neu.
 #
-# WICHTIG: Alle Felder von news_archive.json (id, url, title, date,
-# content_text, content_html, images) MÜSSEN hier definiert bleiben!
+# WICHTIG: Alle Felder der News (id, url, title, date, content_text,
+# content_html, images) MÜSSEN hier definiert bleiben!
 # Pages CMS schreibt beim Speichern nur die hier definierten Felder zurück —
 # fehlt ein Feld hier, würde es aus allen Beiträgen gelöscht werden.
+#
+# Reihenfolge der Rubriken = Abbild der Website-Navigation.
 media:
   - name: uploads
     label: Bilder
@@ -33,7 +39,7 @@ content:
   - name: news
     label: Aktuelles / News
     type: file
-    path: news_archive.json
+    path: news_current.json
     format: json
     list: true
     fields:
@@ -82,96 +88,6 @@ content:
           - name: local
             label: Bilddatei
             type: image
-
-  - name: home
-    label: Startseite
-    type: file
-    path: assets/data/home.json
-    format: json
-    fields:
-      - name: hero
-        label: Kopfbereich (Hero)
-        type: object
-        fields:
-          - name: kickerCity
-            label: Kicker links (Ort)
-            type: string
-          - name: kickerClaim
-            label: Kicker rechts (Claim)
-            type: string
-          - name: titleLine1
-            label: Titel Zeile 1
-            type: string
-          - name: titleLine2
-            label: Titel Zeile 2 (kursiv)
-            type: string
-          - name: lead
-            label: Einleitungstext
-            type: text
-          - name: image
-            label: Hero-Bild
-            type: object
-            fields:
-              - name: src
-                label: Bilddatei
-                type: image
-                options:
-                  media: website-images
-              - name: alt
-                label: Bildbeschreibung (barrierefrei)
-                type: string
-              - name: copyright
-                label: Bildnachweis
-                type: string
-      - name: newsSectionTitle
-        label: Überschrift „Aktuelles"
-        type: string
-      - name: datesPanelTitle
-        label: Überschrift Termine-Box
-        type: string
-      - name: shortcutsTitle
-        label: Überschrift „Schnelle Wege"
-        type: string
-      - name: shortcuts
-        label: Schnelle Wege (Links)
-        type: object
-        list: true
-        fields:
-          - name: label
-            label: Beschriftung
-            type: string
-          - name: cta
-            label: Hinweis rechts
-            type: string
-          - name: href
-            label: Ziel-Link
-            type: string
-      - name: visitLabel
-        label: Abschnitts-Label „Rund um den Verein"
-        type: string
-      - name: visitCards
-        label: Karten „Rund um den Verein"
-        type: object
-        list: true
-        fields:
-          - name: tag
-            label: Kleiner Titel (Tag)
-            type: string
-          - name: title
-            label: Überschrift
-            type: string
-          - name: text
-            label: Kurztext
-            type: string
-          - name: linkLabel
-            label: Linktext
-            type: string
-          - name: href
-            label: Ziel-Link
-            type: string
-          - name: external
-            label: Externer Link (neuem Tab öffnen)
-            type: boolean
 
   - name: termine
     label: Termine & Wettkämpfe
@@ -253,57 +169,6 @@ content:
               - name: label
                 label: Linktext
                 type: string
-
-  - name: team
-    label: Trainerteam
-    type: file
-    path: assets/data/team.json
-    format: json
-    fields:
-      - name: page
-        label: Seitentexte
-        type: object
-        fields:
-          - name: title
-            label: Seitenüberschrift
-            type: string
-          - name: lead
-            label: Einleitungstext
-            type: text
-          - name: directoryTitle
-            label: Überschrift Teamverzeichnis
-            type: string
-          - name: ctaTitle
-            label: Abschluss-Überschrift
-            type: string
-          - name: ctaText
-            label: Abschluss-Text
-            type: text
-          - name: introImage
-            label: Intro-Bild
-            type: object
-            fields:
-              - name: src
-                label: Bilddatei
-                type: image
-                options:
-                  media: website-images
-              - name: alt
-                label: Bildbeschreibung (barrierefrei)
-                type: string
-      - name: trainerPhotos
-        label: Trainerfotos (Name exakt wie im Trainingsplan)
-        type: object
-        list: true
-        fields:
-          - name: name
-            label: Trainername
-            type: string
-          - name: image
-            label: Foto
-            type: image
-            options:
-              media: trainer
 
   - name: training
     label: Trainingszeiten & Sportgruppen
@@ -393,6 +258,147 @@ content:
             list: true
           - name: performance
             label: Wettkampf- und Leistungstraining
+            type: boolean
+
+  - name: team
+    label: Trainerteam
+    type: file
+    path: assets/data/team.json
+    format: json
+    fields:
+      - name: page
+        label: Seitentexte
+        type: object
+        fields:
+          - name: title
+            label: Seitenüberschrift
+            type: string
+          - name: lead
+            label: Einleitungstext
+            type: text
+          - name: directoryTitle
+            label: Überschrift Teamverzeichnis
+            type: string
+          - name: ctaTitle
+            label: Abschluss-Überschrift
+            type: string
+          - name: ctaText
+            label: Abschluss-Text
+            type: text
+          - name: introImage
+            label: Intro-Bild
+            type: object
+            fields:
+              - name: src
+                label: Bilddatei
+                type: image
+                options:
+                  media: website-images
+              - name: alt
+                label: Bildbeschreibung (barrierefrei)
+                type: string
+      - name: trainerPhotos
+        label: Trainerfotos (Name exakt wie im Trainingsplan)
+        type: object
+        list: true
+        fields:
+          - name: name
+            label: Trainername
+            type: string
+          - name: image
+            label: Foto
+            type: image
+            options:
+              media: trainer
+
+  - name: home
+    label: Startseite
+    type: file
+    path: assets/data/home.json
+    format: json
+    fields:
+      - name: hero
+        label: Kopfbereich (Hero)
+        type: object
+        fields:
+          - name: kickerCity
+            label: Kicker links (Ort)
+            type: string
+          - name: kickerClaim
+            label: Kicker rechts (Claim)
+            type: string
+          - name: titleLine1
+            label: Titel Zeile 1
+            type: string
+          - name: titleLine2
+            label: Titel Zeile 2 (kursiv)
+            type: string
+          - name: lead
+            label: Einleitungstext
+            type: text
+          - name: image
+            label: Hero-Bild
+            type: object
+            fields:
+              - name: src
+                label: Bilddatei
+                type: image
+                options:
+                  media: website-images
+              - name: alt
+                label: Bildbeschreibung (barrierefrei)
+                type: string
+              - name: copyright
+                label: Bildnachweis
+                type: string
+      - name: newsSectionTitle
+        label: Überschrift „Aktuelles"
+        type: string
+      - name: datesPanelTitle
+        label: Überschrift Termine-Box
+        type: string
+      - name: shortcutsTitle
+        label: Überschrift „Schnelle Wege"
+        type: string
+      - name: shortcuts
+        label: Schnelle Wege (Links)
+        type: object
+        list: true
+        fields:
+          - name: label
+            label: Beschriftung
+            type: string
+          - name: cta
+            label: Hinweis rechts
+            type: string
+          - name: href
+            label: Ziel-Link
+            type: string
+      - name: visitLabel
+        label: Abschnitts-Label „Rund um den Verein"
+        type: string
+      - name: visitCards
+        label: Karten „Rund um den Verein"
+        type: object
+        list: true
+        fields:
+          - name: tag
+            label: Kleiner Titel (Tag)
+            type: string
+          - name: title
+            label: Überschrift
+            type: string
+          - name: text
+            label: Kurztext
+            type: string
+          - name: linkLabel
+            label: Linktext
+            type: string
+          - name: href
+            label: Ziel-Link
+            type: string
+          - name: external
+            label: Externer Link (neuem Tab öffnen)
             type: boolean
 
 actions:
