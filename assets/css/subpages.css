@@ -4081,7 +4081,7 @@ body.gallery-lightbox-open {
 
 .event-detail-list div {
     display: grid;
-    grid-template-columns: minmax(5rem, auto) 1fr;
+    grid-template-columns: minmax(6.5rem, max-content) minmax(0, 1fr);
     gap: 0.65rem;
     padding-top: 0.45rem;
     border-top: 1px solid color-mix(in srgb, var(--subpage-line) 68%, white);
@@ -4101,6 +4101,8 @@ body.gallery-lightbox-open {
 }
 
 .event-detail-list dd {
+    min-width: 0;
+    overflow-wrap: anywhere;
     margin: 0;
     color: var(--subpage-muted);
     line-height: 1.55;
