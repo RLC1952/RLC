@@ -156,7 +156,8 @@
                     try {
                         const url = new URL(registration);
                         if (url.protocol === 'http:' || url.protocol === 'https:') {
-                            return `<a href="${escapeHtml(url.href)}" class="subpage-inline-link" target="_blank" rel="noopener">${escapeHtml(registration)} <span class="material-icons-round" aria-hidden="true">open_in_new</span></a>`;
+                            const label = url.hostname === 'my.raceresult.com' ? 'raceresult' : url.hostname;
+                            return `<a href="${escapeHtml(url.href)}" class="subpage-inline-link" target="_blank" rel="noopener">${escapeHtml(label)} <span class="material-icons-round" aria-hidden="true">open_in_new</span></a>`;
                         }
                     } catch (error) {
                         // Normal registration notes are displayed as plain text.
