@@ -12,6 +12,9 @@
   },
   "trainerPhotos": [
     {"name": "Ludger Zander", "image": "assets/images/trainer/trainer-ludger-zander.webp"},
-    {"name": "Ulrich Moschner", "image": "assets/images/trainer/trainer-ulrich-moschner.webp"}
+    {"name": "Ulrich Moschner", "image": "assets/images/trainer/trainer-ulrich-moschner.webp"},
+	{"name": "Sebastian Stephani", "image": "assets/images/trainer/trainer-sebastian-stephani.webp"},
+	{"name": "Barbara Ziesmer-Praßni", "image": "assets/images/trainer/trainer-barbara-ziesmerprassni.webp"},
+	{"name": "Carsten Praßni", "image": "assets/images/trainer/trainer-carsten-prassni.webp"}	
   ]
 }
