@@ -83,9 +83,9 @@
                             <div class="subpage-chip-row" role="group" aria-label="Nach Trainingsort filtern">
                                 <button type="button" class="subpage-chip training-filter is-active" data-filter-group="location" data-filter-value="all" aria-pressed="true">Alle Orte</button>
                                 <button type="button" class="subpage-chip training-filter" data-filter-group="location" data-filter-value="stadion" aria-pressed="false">Stadion Hohenhorst</button>
-                                <button type="button" class="subpage-chip training-filter" data-filter-group="location" data-filter-value="kraftraum" aria-pressed="false">Kraftraum</button>
+                                <!-- <button type="button" class="subpage-chip training-filter" data-filter-group="location" data-filter-value="kraftraum" aria-pressed="false">Kraftraum</button> -->
                                 <button type="button" class="subpage-chip training-filter" data-filter-group="location" data-filter-value="hohenzollernhalle" aria-pressed="false">Hohenzollernhalle</button>
-                                <button type="button" class="subpage-chip training-filter" data-filter-group="location" data-filter-value="5fach" aria-pressed="false">5-fach Sporthalle</button>
+                                <button type="button" class="subpage-chip training-filter" data-filter-group="location" data-filter-value="arena" aria-pressed="false">Vestische Arena Alfons Schütt</button>
                             </div>
                         </div>
                         <p id="training-filter-status" class="subpage-toolbar__status" aria-live="polite">Alle Einheiten sichtbar.</p>
@@ -205,7 +205,7 @@
                 if (filterValue === 'stadion') return location.includes('stadion hohenhorst');
                 if (filterValue === 'kraftraum') return location.includes('kraftraum');
                 if (filterValue === 'hohenzollernhalle') return location.includes('hohenzollernhalle');
-                if (filterValue === '5fach') return location.includes('5-fach sporthalle');
+                if (filterValue === 'arena') return location.includes('arena');
 
                 return false;
             };
