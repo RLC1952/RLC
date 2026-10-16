@@ -43,7 +43,7 @@
 	{"day": "Donnerstag", "time": "18:00 - 20:00 Uhr", "group": "Erwachsene", "year": "2007 und älter", "location": "Stadion Hohenhorst", "trainers": [], "performance": true},
 	{"day": "Samstag", "time": "10:00 - 12:00 Uhr", "group": "Erwachsene", "year": "2007 und älter", "location": "Stadion Hohenhorst", "trainers": [], "performance": true},
 	{"day": "Montag", "time": "18:00 - 20:00 Uhr", "group": "Senioren 1", "year": "Männer Ü60", "location": "Hohenzollernhalle", "trainers": ["Ulrich Moschner"], "performance":false},
-	{"day": "Dienstag", "time": "18:30 - 20:00 Uhr", "group": "Senioren 2 (Wirbelsäulentraining)", "year": "", "trainers": ["Uschi Götz-Trogemann"], "performance": false},
+	{"day": "Dienstag", "time": "18:30 - 20:00 Uhr", "group": "Senioren 2 (Wirbelsäulentraining)", "year": "", "location": "Hohenzollernhalle", "trainers": ["Uschi Götz-Trogemann"], "performance": false},
 	{"day": "Montag", "time": "20:00 - 21:00 Uhr", "group": "Senioren 3", "year": "Männer Ü50", "location": "Hohenzollernhalle", "trainers": ["Fritz Gerke"], "performance": false},
 	{"day": "Mittwoch", "time": "18:00 - 19:00 Uhr", "group": "Senioren 4 (Kraftaufbau)", "year": "Frauen Ü50", "location": "Stadion Hohenhorst", "trainers": ["Barbara Ziesmer-Praßni"], "performance":false},
 	{"day": "Donnerstag", "time": "20:00 - 21:00 Uhr", "group": "Senioren 5 (Gesundheitssport)", "year": "Ü50", "location":"Hohenzollernhalle", "trainers": ["Arne Wendler"], "performance": false},
