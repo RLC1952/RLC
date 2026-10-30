@@ -1,5 +1,14 @@
 window.newsData = [
     {
+        "url": "https://www.rlc1952.de/rlc.php?id=0-0000-0-10245",
+        "id": "10245",
+        "title": "KEIN RLC-TRAINING AM FREITAG, 6. NOVEMBER 2026",
+        "date": "30. Oktober 2026",
+        "content_html": "<p>Am Freitag, den 6. November 2026, kann in der Vestischen Arena Alfons Schütt kein RLC-Training stattfinden. Citybasket Recklinghausen hat an diesem Wochenende einen Doppelspieltag. Wir bitten um Verständnis.</p>",
+        "content_text": "Am Freitag, den 6. November 2026, kann in der Vestischen Arena Alfons Schütt kein RLC-Training stattfinden. Citybasket Recklinghausen hat an diesem Wochenende einen Doppelspieltag. Wir bitten um Verständnis.",
+        "images": []
+    },
+    {
         "url": "https://www.rlc1952.de/rlc.php?id=0-0000-0-10244",
         "id": "10244",
         "title": "ZEIT FÜR ETWAS NEUES: UNSERE NEUE WEBSITE IST ONLINE",
@@ -453,19 +462,5 @@ window.newsData = [
         "content_html": "<p class=\"detailViewTop\"><b>15. Recklinghäuser Kids-Cup 2026</b></p>",
         "content_text": "15. Recklinghäuser Kids-Cup 2026",
         "images": []
-    },
-    {
-        "url": "https://www.rlc1952.de/rlc.php?id=0-0000-0-10207",
-        "id": "10207",
-        "title": "DEUTSCHE JUGENDMEISTERSCHAFTEN -  EIN TOLLER ERFOLG!",
-        "date": "25. Februar 2026",
-        "content_html": "<div class=\"preView\"><img alt=\"\" src=\"assets/images/uploads/zoom_20260225183651_StaffelDM_Halle.jpeg\"/></div><p class=\"detailViewTop\"><b>Bei den Deutschen Hallenmeisterschaften der Altersklasse U20 in Sindelfingen zeigte sich der Recklinghäuser LC in bestechender Form und präsentierte sich auf nationaler Bühne mehr als respektabel.</b></p>",
-        "content_text": "Bei den Deutschen Hallenmeisterschaften der Altersklasse U20 in Sindelfingen zeigte sich der Recklinghäuser LC in bestechender Form und präsentierte sich auf nationaler Bühne mehr als respektabel.",
-        "images": [
-            {
-                "remote": "https://www.rlc1952.de/assets/images/uploads/zoom_20260225183651_StaffelDM_Halle.jpeg",
-                "local": "news_assets/10207/zoom_20260225183651_StaffelDM_Halle.jpeg"
-            }
-        ]
     }
 ];
