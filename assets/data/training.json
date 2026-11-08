@@ -20,7 +20,7 @@
   },
   "groups": [
 	{"day": "Mittwoch", "time": "16:30 - 17:30 Uhr", "group": "Kinder U6", "year": "2022/2023", "location": "Hohenzollernhalle", "trainers": ["Linda Beerhorst", "Leni Nefedev", "Tessa Ribbrock"], "performance": false},
-	{"day": "Dienstag", "time": "17:00 - 18:30 Uhr", "group": "Kinder U8", "year": "2020/2021", "location": "Hohenzollernhalle", "trainers": [], "performance": false},
+	{"day": "Dienstag", "time": "17:00 - 18:30 Uhr", "group": "Kinder U8", "year": "2020/2021", "location": "Hohenzollernhalle", "trainers": ["Margitta Moye", "Thomas Veuhoff", "Martin Radtke", "Diana Kohan"], "performance": false},
 	{"day": "Dienstag", "time": "16:30 - 18:00 Uhr", "group": "Kinder U10", "year": "2018/2019", "location": "Stadion Hohenhorst", "trainers": ["Carsten Praßni", "Barbara Ziesmer-Praßni", "Maja Rothers"], "performance": false},
 	{"day": "Donnerstag", "time": "16:30 - 18:00 Uhr", "group": "Kinder U10", "year": "2018/2019", "location": "Hohenzollernhalle", "trainers": ["Carsten Praßni", "Joris Preckel", "Max Esther"], "performance": false},
 	{"day": "Freitag", "time": "16:30 - 18:00 Uhr", "group": "Kinder U10", "year": "2018/2019", "location": "Vestische Arena Alfons Schütt", "trainers": ["Carsten Praßni", "Joris Preckel", "Max Esther"], "performance": false},
