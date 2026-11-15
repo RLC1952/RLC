@@ -18,6 +18,8 @@ import shutil
 import subprocess
 import sys
 from pathlib import Path
+from html import escape
+from urllib.parse import urlparse
 
 ROOT_DIR = Path(__file__).resolve().parent.parent
 ARCHIVE_FILE = ROOT_DIR / "news_archive.json"
@@ -45,9 +47,22 @@ def main():
     parser.add_argument("--text", required=True, help="Textinhalt des Beitrags (Absaetze durch Zeilenumbrueche trennen)")
     parser.add_argument("--date", default=None, help="Datum (z.B. '03. September 2026', Standard: heute)")
     parser.add_argument("--image", default=None, help="Optionaler Pfad zu einem Bild")
+    parser.add_argument("--link-text", default=None, help="Optionaler Linktext im Beitrag")
+    parser.add_argument("--link-url", default=None, help="URL des optionalen Links")
     parser.add_argument("--skip-gen", action="store_true", help="Detailseiten-Generierung ueberspringen (nur fuer Tests)")
 
     args = parser.parse_args()
+
+    if bool(args.link_text) != bool(args.link_url):
+        parser.error("--link-text und --link-url muessen zusammen angegeben werden.")
+    if args.link_text:
+        args.link_text = args.link_text.strip()
+        args.link_url = args.link_url.strip()
+        parsed_link_url = urlparse(args.link_url)
+        is_site_path = args.link_url.startswith("/") and not args.link_url.startswith("//") and "\\" not in args.link_url
+        is_web_url = parsed_link_url.scheme in {"http", "https"} and bool(parsed_link_url.netloc)
+        if not args.link_text or any(char.isspace() for char in args.link_url) or not (is_site_path or is_web_url):
+            parser.error("Der Link benoetigt einen Text und eine gueltige HTTPS-, HTTP- oder Website-URL.")
 
     if not CURRENT_FILE.exists():
         print(f"FEHLER: {CURRENT_FILE} nicht gefunden!", file=sys.stderr)
@@ -109,6 +124,14 @@ def main():
     else:
         content_html = html_paragraphs
 
+    link = None
+    if args.link_text:
+        link = {"text": args.link_text, "url": args.link_url}
+        content_html += (
+            f'<p><a href="{escape(args.link_url, quote=True)}" target="_blank" rel="noopener">'
+            f'{escape(args.link_text)}</a></p>'
+        )
+
     # 6. Artikel-Objekt erstellen
     new_article = {
         "url": f"https://www.rlc1952.de/rlc.php?id=0-0000-0-{str_id}",
@@ -119,6 +142,8 @@ def main():
         "content_text": text_content,
         "images": images_list
     }
+    if link:
+        new_article["links"] = [link]
 
     # 7. Vorne in news_current.json einfuegen (neueste zuerst)
     current.insert(0, new_article)

@@ -3,6 +3,7 @@ import os
 import re
 from html import escape
 from pathlib import Path
+from urllib.parse import urlparse
 
 ARCHIVE_FILE = Path('news_archive.json')
 OUTPUT_DIR = Path('pages/news')
@@ -23,12 +24,29 @@ def paragraphs(article):
     text = (article.get('content_text') or '').strip()
     if text:
         chunks = [chunk.strip() for chunk in re.split(r'\n{2,}|\r?\n', text) if chunk.strip()]
-        return ''.join(f'<p>{escape(chunk)}</p>' for chunk in chunks)
+        body = ''.join(f'<p>{escape(chunk)}</p>' for chunk in chunks)
+    else:
+        html = article.get('content_html') or ''
+        text = re.sub(r'<[^>]+>', ' ', html)
+        text = re.sub(r'\s+', ' ', text).strip()
+        body = f'<p>{escape(text)}</p>' if text else '<p>Zu diesem Beitrag liegt noch kein Text vor.</p>'
 
-    html = article.get('content_html') or ''
-    text = re.sub(r'<[^>]+>', ' ', html)
-    text = re.sub(r'\s+', ' ', text).strip()
-    return f'<p>{escape(text)}</p>' if text else '<p>Zu diesem Beitrag liegt noch kein Text vor.</p>'
+    links = article.get('links') or []
+    for link in links:
+        if not isinstance(link, dict):
+            raise ValueError(f"Ungueltiger Link in News-Beitrag {article.get('id', '')}.")
+        label = str(link.get('text') or '').strip()
+        url = str(link.get('url') or '').strip()
+        parsed_url = urlparse(url)
+        is_site_path = url.startswith('/') and not url.startswith('//') and '\\' not in url
+        is_web_url = parsed_url.scheme in {'http', 'https'} and bool(parsed_url.netloc)
+        if not label or any(char.isspace() for char in url) or not (is_site_path or is_web_url):
+            raise ValueError(f"Ungueltiger Link in News-Beitrag {article.get('id', '')}.")
+        body += (
+            f'<p><a class="subpage-link" href="{escape(url, quote=True)}" target="_blank" rel="noopener">'
+            f'{escape(label)} <span class="material-icons-round" aria-hidden="true">open_in_new</span></a></p>'
+        )
+    return body
 
 
 def image_markup(article):

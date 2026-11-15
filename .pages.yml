@@ -8,7 +8,7 @@
 # generiert die Detailseiten + Übersichtsdaten neu.
 #
 # WICHTIG: Alle Felder der News (id, url, title, date, content_text,
-# content_html, images) MÜSSEN hier definiert bleiben!
+# content_html, images, links) MÜSSEN hier definiert bleiben!
 # Pages CMS schreibt beim Speichern nur die hier definierten Felder zurück —
 # fehlt ein Feld hier, würde es aus allen Beiträgen gelöscht werden.
 #
@@ -88,6 +88,23 @@ content:
           - name: local
             label: Bilddatei
             type: image
+      - name: links
+        label: Links (optional)
+        type: object
+        list: true
+        description: Links erscheinen unter dem Text des Beitrags.
+        fields:
+          - name: text
+            label: Linktext
+            type: string
+            required: true
+          - name: url
+            label: Link-Ziel
+            type: string
+            required: true
+            pattern:
+              regex: '^(?:/(?!/)[^\s\\]*|https?://[^/\s?#]+[^\s]*)$'
+              message: "Bitte einen Website-Pfad ab / oder eine vollständige HTTP- bzw. HTTPS-Adresse eingeben."
 
   - name: termine
     label: Termine & Wettkämpfe

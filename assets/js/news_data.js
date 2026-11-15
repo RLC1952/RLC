@@ -1,5 +1,25 @@
 window.newsData = [
     {
+        "url": "https://www.rlc1952.de/rlc.php?id=0-0000-0-10246",
+        "id": "10246",
+        "title": "WETTKAMPFKOLLEKTION WIEDER VERFÜGBAR",
+        "date": "15. November 2026",
+        "content_html": "<div class=\"preView\"><img alt=\"\" src=\"news_assets/10246/Wettkampfkollektion-News.png\"/></div><p>Unsere Wettkampfkollektion ist wieder verfügbar. Die Übersicht für die aktuelle Saison findet ihr im PDF.</p><p><a href=\"/assets/pdf/wettkampfkollektion-2025-2026.pdf\" target=\"_blank\" rel=\"noopener\">Wettkampfkollektion ansehen (PDF)</a></p>",
+        "content_text": "Unsere Wettkampfkollektion ist wieder verfügbar. Die Übersicht für die aktuelle Saison findet ihr im PDF.",
+        "images": [
+            {
+                "remote": "https://www.rlc1952.de/news_assets/10246/Wettkampfkollektion-News.png",
+                "local": "news_assets/10246/Wettkampfkollektion-News.png"
+            }
+        ],
+        "links": [
+            {
+                "text": "Wettkampfkollektion ansehen (PDF)",
+                "url": "/assets/pdf/wettkampfkollektion-2025-2026.pdf"
+            }
+        ]
+    },
+    {
         "url": "https://www.rlc1952.de/rlc.php?id=0-0000-0-10245",
         "id": "10245",
         "title": "KEIN RLC-TRAINING AM FREITAG, 6. NOVEMBER 2026",
@@ -452,15 +472,6 @@ window.newsData = [
         "date": "08. März 2026",
         "content_html": "<p class=\"detailViewTop\"><b>9. Sparkassen Abendlauf</b></p>",
         "content_text": "9. Sparkassen Abendlauf",
-        "images": []
-    },
-    {
-        "url": "https://www.rlc1952.de/rlc.php?id=0-0000-0-10208",
-        "id": "10208",
-        "title": "15. RECKLINGHÄUSER KIDS-CUP, 04.06.2026",
-        "date": "08. März 2026",
-        "content_html": "<p class=\"detailViewTop\"><b>15. Recklinghäuser Kids-Cup 2026</b></p>",
-        "content_text": "15. Recklinghäuser Kids-Cup 2026",
         "images": []
     }
 ];
