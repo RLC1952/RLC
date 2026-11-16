@@ -11,16 +11,15 @@
     <link rel="icon" type="image/png" sizes="192x192" href="/assets/images/favicon/favicon-192.png" />
     <link rel="apple-touch-icon" href="/assets/images/favicon/apple-touch-icon.png" />
     <meta name="description"
-        content="Kontaktseite des Recklinghäuser Leichtathletik Clubs 1952 e.V. mit klarer Erstorientierung, direktem Kontaktweg und strukturierter Anfrage für Training, Mitgliedschaft oder Medienanliegen.">
+        content="Kontakt zum Recklinghäuser Leichtathletik Club 1952 e.V. per E-Mail für Training, Mitgliedschaft und allgemeine Anfragen.">
     <link href="../assets/css/design-tokens.css" rel="stylesheet" />
     <link href="../assets/css/shell.css" rel="stylesheet" />
-    <link href="../assets/css/subpages.css?v=15" rel="stylesheet" />
+    <link href="../assets/css/subpages.css?v=16" rel="stylesheet" />
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&amp;family=Montserrat:wght@700;900&amp;display=swap"
         rel="stylesheet" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet" />
     <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
-    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" async defer></script>
     <script src="../assets/js/components.js?v=3"></script>
 </head>
 
@@ -35,9 +34,9 @@
                     <p class="subpage-lead">Probetraining, Mitgliedschaft oder allgemeine Frage – hier beginnt der Kontakt.</p>
                 </div>
 </section>
-<section class="subpage-section subpage-section--tight" aria-labelledby="contact-form-title" id="contact">
+<section class="subpage-section subpage-section--tight" aria-labelledby="contact-direct-title" id="contact">
                 <div class="contact-simple-stack">
-                    <section class="subpage-surface" aria-labelledby="contact-form-title">
+                    <section class="subpage-surface" aria-labelledby="contact-form-title" hidden>
                         <div class="subpage-title-row">
                             <div>
                                 <span class="subpage-eyebrow">Kontaktformular</span>
@@ -95,25 +94,23 @@
                         <div class="subpage-title-row">
                             <div>
                                 <span class="subpage-eyebrow">Direkter Kontakt</span>
-                                <h2 id="contact-direct-title" class="subpage-title">E-Mail und Anschrift.</h2>
+                                <h2 id="contact-direct-title" class="subpage-title">E-Mail und Postanschrift.</h2>
                             </div>
                         </div>
-                        <div class="contact-direct-grid">
+                        <div class="contact-form__grid">
                             <article class="contact-direct-card">
                                 <span class="subpage-kicker">E-Mail</span>
                                 <h3>Allgemeiner Vereinskontakt</h3>
                                 <p>Zentrale Adresse für Probetraining, Mitgliedschaft und Rückfragen.</p>
                                 <a href="mailto:info@rlc1952.de" class="subpage-link">info@rlc1952.de <span class="material-icons-round" aria-hidden="true">east</span></a>
+                                <div class="subpage-note">
+                                    <p><strong>Wichtiger Hinweis:</strong> Wir antworten in aller Regel sehr zeitnah. Sollten Sie bis zum Folgetag noch keine Antwort erhalten haben, dann prüfen Sie bitte Ihren Spamfilter.</p>
+                                </div>
                             </article>
                             <article class="contact-direct-card">
                                 <span class="subpage-kicker">Postanschrift</span>
                                 <h3>Recklinghäuser LC 1952 e.V.</h3>
                                 <p>Postfach 10 16 23<br>45616 Recklinghausen</p>
-                            </article>
-                            <article class="contact-direct-card">
-                                <span class="subpage-kicker">Trainingsbezug</span>
-                                <h3>Stadion Hohenhorst</h3>
-                                <p>Am Stadion 1<br>45659 Recklinghausen</p>
                             </article>
                         </div>
                     </section>
@@ -133,7 +130,7 @@
             const turnstileTarget = document.getElementById('contact-turnstile');
             let turnstileWidgetId = null;
 
-            if (!form) return;
+            if (!form || form.closest('[hidden]')) return;
             if (subjectSelect && new URLSearchParams(window.location.search).get('subject') === 'probetraining') {
                 subjectSelect.value = 'Probetraining';
             }
